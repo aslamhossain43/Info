@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Info</string>
+    <string name="splash_alert_title">Notice carefully !</string>
+    <string name="splash_alert_message">Do you want to keep it in background ?</string>
+    <string name="splash_alert_yes">Yes</string>
+    <string name="splash_alert_cancel">Cancel</string>
 </resources>
