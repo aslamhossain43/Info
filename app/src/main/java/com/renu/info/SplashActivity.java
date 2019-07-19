@@ -55,7 +55,6 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
-
     public void doWork() {
         for (progress = 10; progress <= 100; progress = progress + 10) {
             try {
