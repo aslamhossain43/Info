@@ -29,7 +29,6 @@ public class MyFoodService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-
         createNotificationChannel();
 
         Intent cintent = new Intent(MyFoodService.this, MainActivity.class);
@@ -52,7 +51,6 @@ public class MyFoodService extends Service {
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MyFoodService.this);
         int notificationId = (int) (System.currentTimeMillis() / 4);
         notificationManager.notify(notificationId, mBuilder.build());
-
 
         return START_STICKY;
 

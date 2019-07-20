@@ -27,18 +27,23 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         intiViews();
         initAll();
+
+
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 doWork();
-                //Intent intent=new Intent(SplashActivity.this,MyFoodService.class);
-                //startActivity(intent);
 
                 startService(new Intent(SplashActivity.this, MyFoodService.class));
+
+
 
             }
         });
         thread.start();
+
+        Intent intent=new Intent(SplashActivity.this,CurrentInformationOfDevice.class);
+        startActivity(intent);
     }
 
     private void initAll() {
@@ -66,7 +71,7 @@ public class SplashActivity extends AppCompatActivity {
         }
 
 // to minimize activity
-        this.moveTaskToBack(true);
+      //  this.moveTaskToBack(true);
     }
 
 
