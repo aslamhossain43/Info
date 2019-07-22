@@ -11,27 +11,58 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
-public class CurrentInformationOfDevice  extends AppCompatActivity{
+public class CurrentInformationOfDevice extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationProviderClient;
+    private LocationRequest locationRequest;
+    private LocationCallback locationCallback;
+
+
     @Override
     protected void onCreate(@NonNull Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        fusedLocationProviderClient=LocationServices.getFusedLocationProviderClient(this);
-getDeviceCurrentLocation();
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
+        locationRequest = new LocationRequest();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(10000);
+        locationRequest.setFastestInterval(5000);
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                } else {
+                    for (Location location : locationResult.getLocations()) {
+                        Log.d("ltlt", "Latitude : " + location.getLatitude() + " ,Longitude : " + location.getLongitude());
+                    }
+                }
+            }
+        };
+
+        getDeviceCurrentLocation();
+        getLocationUpdate();
 
 
     }
 
-    private boolean checkLocationPermission(){
+    private void getLocationUpdate() {
+        if (checkLocationPermission()) {
+            fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null);
+        }
+    }
+
+    private boolean checkLocationPermission() {
 
 
-        if (ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},111);
-        return  false;
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 111);
+            return false;
         }
         return true;
 
@@ -39,24 +70,24 @@ getDeviceCurrentLocation();
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode==111 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+        if (requestCode == 111 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             getDeviceCurrentLocation();
         }
     }
 
     private void getDeviceCurrentLocation() {
-        if (checkLocationPermission()){
+        if (checkLocationPermission()) {
 
             fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
                 @Override
                 public void onSuccess(Location location) {
-               if (location!=null){
+                    if (location != null) {
 
-                   Log.d("lt", "onSuccess: "+location.getLatitude()+" "+location.getLongitude());
-               }
+                        Log.d("lt", "onSuccess: " + location.getLatitude() + " " + location.getLongitude());
+                    }
                 }
             });
-        }else {
+        } else {
             checkLocationPermission();
         }
     }

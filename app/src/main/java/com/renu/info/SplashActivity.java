@@ -1,10 +1,12 @@
 package com.renu.info;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
@@ -42,8 +44,24 @@ public class SplashActivity extends AppCompatActivity {
         });
         thread.start();
 
+        Intent intent1=new Intent(SplashActivity.this,GetDataFromOpenWeather.class);
+        startActivityForResult(intent1,1);
+/*
         Intent intent=new Intent(SplashActivity.this,CurrentInformationOfDevice.class);
-        startActivity(intent);
+        startActivity(intent);*/
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+          if (requestCode==1) {
+
+
+              String lat = data.getStringExtra("lat");
+              String lon = data.getStringExtra("lon");
+
+              Log.d("sv", "onCreate: " + lat + ", " + lon);
+          }
     }
 
     private void initAll() {

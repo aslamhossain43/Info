@@ -21,9 +21,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".CurrentInformationOfDevice"></activity>
-        <service android:enabled="true" android:name=".MyFoodService"></service>
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".CurrentInformationOfDevice"/>
+        <activity android:name=".GetDataFromOpenWeather"/>
+        <service android:enabled="true" android:name=".MyFoodService"/>
     </application>
 
 </manifest>
