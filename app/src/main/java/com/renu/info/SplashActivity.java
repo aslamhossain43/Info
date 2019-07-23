@@ -1,15 +1,13 @@
 package com.renu.info;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashActivity extends AppCompatActivity {
     private boolean isNetworkOk;
@@ -36,22 +34,24 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 doWork();
 
-                startService(new Intent(SplashActivity.this, MyFoodService.class));
-
+                // startService(new Intent(SplashActivity.this, MyFoodService.class));
+                Intent intent = new Intent(SplashActivity.this, GetDataFromOpenWeather.class);
+                startActivity(intent);
 
 
             }
         });
         thread.start();
 
-        Intent intent1=new Intent(SplashActivity.this,GetDataFromOpenWeather.class);
+       /* Intent intent1=new Intent(SplashActivity.this,GetDataFromOpenWeather.class);
         startActivityForResult(intent1,1);
-/*
-        Intent intent=new Intent(SplashActivity.this,CurrentInformationOfDevice.class);
+*/
+
+        /*Intent intent=new Intent(SplashActivity.this,CurrentInformationOfDevice.class);
         startActivity(intent);*/
     }
 
-    @Override
+   /* @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
           if (requestCode==1) {
@@ -62,7 +62,7 @@ public class SplashActivity extends AppCompatActivity {
 
               Log.d("sv", "onCreate: " + lat + ", " + lon);
           }
-    }
+    }*/
 
     private void initAll() {
 
@@ -89,7 +89,7 @@ public class SplashActivity extends AppCompatActivity {
         }
 
 // to minimize activity
-      //  this.moveTaskToBack(true);
+        //  this.moveTaskToBack(true);
     }
 
 

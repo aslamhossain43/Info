@@ -9,15 +9,27 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
-import android.widget.Toast;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+
 public class MyFoodService extends Service {
     private String message = "Hello Developer ! You are granted for software development. Please check your email";
     private static final String CHANNEL_ID = "Message";
+    //DATA
+    String latitude;
+    String longitude;
+    String weatherType;
+    String description;
+    String temparature;
+    String pressure;
+    String humidity;
+    String date;
+    String sunrise;
+    String sunset;
 
 
     @Nullable
@@ -28,6 +40,8 @@ public class MyFoodService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        getWeatherInfo(intent);
+
 
         createNotificationChannel();
 
@@ -38,8 +52,8 @@ public class MyFoodService extends Service {
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(MyFoodService.this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_splash_info)
-                .setContentTitle("My Notification")
-                .setContentText(message)
+                .setContentTitle(weatherType)
+                .setContentText(description)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
@@ -55,6 +69,24 @@ public class MyFoodService extends Service {
         return START_STICKY;
 
 
+    }
+
+
+    private void getWeatherInfo(Intent intent) {
+        if (intent != null) {
+            latitude = intent.getStringExtra("lat");
+            longitude = intent.getStringExtra("lon");
+            weatherType = intent.getStringExtra("weathertype");
+            description = intent.getStringExtra("description");
+            temparature = intent.getStringExtra("temp");
+            pressure = intent.getStringExtra("pressure");
+            humidity = intent.getStringExtra("humidity");
+            date = intent.getStringExtra("date");
+            sunrise = intent.getStringExtra("sunrise");
+            sunset = intent.getStringExtra("sunset");
+            Log.d("latitude", "getWeatherInfo: " + latitude + ", " + longitude + ", " + weatherType + ", " + description + ", " + temparature + ", " + pressure + ", " + humidity
+                    + ", " + date + ", " + sunrise + ", " + sunset);
+        }
     }
 
     private void createNotificationChannel() {

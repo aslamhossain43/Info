@@ -1,6 +1,7 @@
 package com.renu.info;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -39,6 +40,11 @@ public class CurrentInformationOfDevice extends AppCompatActivity {
                     return;
                 } else {
                     for (Location location : locationResult.getLocations()) {
+                        Intent forLatLon = new Intent(CurrentInformationOfDevice.this, GetDataFromOpenWeather.class);
+                        forLatLon.putExtra("lat", location.getLatitude());
+                        forLatLon.putExtra("lon", location.getLongitude());
+                        setResult(11, forLatLon);
+                        //finish();
                         Log.d("ltlt", "Latitude : " + location.getLatitude() + " ,Longitude : " + location.getLongitude());
                     }
                 }
