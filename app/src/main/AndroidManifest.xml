@@ -22,8 +22,8 @@
         </activity>
 
         <activity android:name=".MainActivity"/>
-        <activity android:name=".CurrentInformationOfDevice"/>
-        <activity android:name=".GetDataFromOpenWeather"/>
+        <!--<activity android:name=".CurrentInformationOfDevice"/>-->
+        <activity android:name=".WeatherInformation"/>
         <service android:enabled="true" android:name=".MyFoodService"/>
     </application>
 

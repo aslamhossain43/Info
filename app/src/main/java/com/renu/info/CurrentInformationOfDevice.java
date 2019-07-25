@@ -1,3 +1,4 @@
+/*
 package com.renu.info;
 
 import android.Manifest;
@@ -32,7 +33,7 @@ public class CurrentInformationOfDevice extends AppCompatActivity {
         locationRequest = new LocationRequest();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         locationRequest.setInterval(10000);
-        locationRequest.setFastestInterval(5000);
+        locationRequest.setFastestInterval(10000);
         locationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
@@ -44,6 +45,7 @@ public class CurrentInformationOfDevice extends AppCompatActivity {
                         forLatLon.putExtra("lat", location.getLatitude());
                         forLatLon.putExtra("lon", location.getLongitude());
                         setResult(11, forLatLon);
+                        //startActivity(forLatLon);
                         //finish();
                         Log.d("ltlt", "Latitude : " + location.getLatitude() + " ,Longitude : " + location.getLongitude());
                     }
@@ -98,3 +100,4 @@ public class CurrentInformationOfDevice extends AppCompatActivity {
         }
     }
 }
+*/

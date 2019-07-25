@@ -34,35 +34,15 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 doWork();
 
-                // startService(new Intent(SplashActivity.this, MyFoodService.class));
-                Intent intent = new Intent(SplashActivity.this, GetDataFromOpenWeather.class);
+                 startService(new Intent(SplashActivity.this, MyFoodService.class));
+                /*Intent intent = new Intent(SplashActivity.this, WeatherInformation.class);
                 startActivity(intent);
-
+*/
 
             }
         });
         thread.start();
-
-       /* Intent intent1=new Intent(SplashActivity.this,GetDataFromOpenWeather.class);
-        startActivityForResult(intent1,1);
-*/
-
-        /*Intent intent=new Intent(SplashActivity.this,CurrentInformationOfDevice.class);
-        startActivity(intent);*/
     }
-
-   /* @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-          if (requestCode==1) {
-
-
-              String lat = data.getStringExtra("lat");
-              String lon = data.getStringExtra("lon");
-
-              Log.d("sv", "onCreate: " + lat + ", " + lon);
-          }
-    }*/
 
     private void initAll() {
 

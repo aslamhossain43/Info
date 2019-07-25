@@ -1,37 +1,57 @@
 package com.renu.info;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
-import android.media.RingtoneManager;
-import android.net.Uri;
-import android.os.Build;
+import android.os.Handler;
 import android.os.IBinder;
-import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
+
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MyFoodService extends Service {
-    private String message = "Hello Developer ! You are granted for software development. Please check your email";
-    private static final String CHANNEL_ID = "Message";
-    //DATA
-    String latitude;
-    String longitude;
-    String weatherType;
-    String description;
-    String temparature;
-    String pressure;
-    String humidity;
-    String date;
-    String sunrise;
-    String sunset;
+    public static final int notify = 1500000;  //interval between two services(Here Service run every 5 Minute)
+    private Handler mHandler = new Handler();   //run on another Thread to avoid crash
+    private Timer mTimer = null;    //timer handling
+
+    //---------------------------------------------------------------------------------------
+    @Override
+    public void onCreate() {
+        if (mTimer != null) // Cancel if already existed
+            mTimer.cancel();
+        else
+            mTimer = new Timer();   //recreate new
+        mTimer.scheduleAtFixedRate(new TimeDisplay(), 0, notify);   //Schedule task
+    }
+
+    class TimeDisplay extends TimerTask {
+        @Override
+        public void run() {
+            // run on another thread
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    // display toast
 
 
+                    Intent intent = new Intent(MyFoodService.this, WeatherInformation.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+
+
+                    Toast.makeText(MyFoodService.this, "Service is running", Toast.LENGTH_SHORT).show();
+
+                }
+            });
+        }
+    }
+
+
+    //-------------------------------------------------------------------------------------------
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -40,31 +60,7 @@ public class MyFoodService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        getWeatherInfo(intent);
-
-
-        createNotificationChannel();
-
-        Intent cintent = new Intent(MyFoodService.this, MainActivity.class);
-        cintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(MyFoodService.this, 0, cintent, 0);
-
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(MyFoodService.this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_splash_info)
-                .setContentTitle(weatherType)
-                .setContentText(description)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true);
-        Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-
-        mBuilder.setSound(uri);
-
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MyFoodService.this);
-        int notificationId = (int) (System.currentTimeMillis() / 4);
-        notificationManager.notify(notificationId, mBuilder.build());
+        Toast.makeText(this, "onStartCommand()", Toast.LENGTH_SHORT).show();
 
         return START_STICKY;
 
@@ -72,47 +68,14 @@ public class MyFoodService extends Service {
     }
 
 
-    private void getWeatherInfo(Intent intent) {
-        if (intent != null) {
-            latitude = intent.getStringExtra("lat");
-            longitude = intent.getStringExtra("lon");
-            weatherType = intent.getStringExtra("weathertype");
-            description = intent.getStringExtra("description");
-            temparature = intent.getStringExtra("temp");
-            pressure = intent.getStringExtra("pressure");
-            humidity = intent.getStringExtra("humidity");
-            date = intent.getStringExtra("date");
-            sunrise = intent.getStringExtra("sunrise");
-            sunset = intent.getStringExtra("sunset");
-            Log.d("latitude", "getWeatherInfo: " + latitude + ", " + longitude + ", " + weatherType + ", " + description + ", " + temparature + ", " + pressure + ", " + humidity
-                    + ", " + date + ", " + sunrise + ", " + sunset);
-        }
-    }
-
-    private void createNotificationChannel() {
-
-        CharSequence channelName = CHANNEL_ID;
-        String channelDesc = "channelDesc";
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, channelName, importance);
-            channel.setDescription(channelDesc);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            assert notificationManager != null;
-            NotificationChannel currChannel = notificationManager.getNotificationChannel(CHANNEL_ID);
-            if (currChannel == null)
-                notificationManager.createNotificationChannel(channel);
-        }
-
-    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mTimer.cancel();    //For Cancel Timer
+        Toast.makeText(this, "Service is Destroyed", Toast.LENGTH_SHORT).show();
+
 
     }
+
+
 }
