@@ -4,4 +4,12 @@
     <string name="splash_alert_message">Do you want to keep it in background ?</string>
     <string name="splash_alert_yes">Yes</string>
     <string name="splash_alert_cancel">Cancel</string>
+
+    <string-array name="food_names">
+        <item>Egg</item>
+        <item>Banana</item>
+
+
+    </string-array>
+
 </resources>

@@ -13,7 +13,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,8 +31,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Date;
 
 public class WeatherInformation extends Activity {
     private String message = "Hello Developer ! You are granted for software development. Please check your email";
@@ -56,7 +53,7 @@ public class WeatherInformation extends Activity {
     String pressure;
     String humidity;
     String date;
-    String sunrise = "1564081456341";
+    String sunrise;
     String sunset;
     //------------------------------
     long longSunrise;
@@ -65,6 +62,7 @@ public class WeatherInformation extends Activity {
     long longAdditionalSunset;
     long longNoon;
     long longAdditionalNoon;
+
     //------------------------------------------------------------------------------------------
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -130,52 +128,57 @@ public class WeatherInformation extends Activity {
                     public void onResponse(JSONObject response) {
                         try {
                             JSONObject jsonObjectForLatLon = response.getJSONObject("coord");
-                            valueLatitude = jsonObjectForLatLon.getString("lat");
-                            valueLongitude = jsonObjectForLatLon.getString("lon");
+                            WeatherInformation.this.valueLatitude = jsonObjectForLatLon.getString("lat");
+                            WeatherInformation.this.valueLongitude = jsonObjectForLatLon.getString("lon");
                             JSONArray jsonArrayForWeather = response.getJSONArray("weather");
                             JSONObject jsonObjectForWeather = jsonArrayForWeather.getJSONObject(0);
-                            weatherType = jsonObjectForWeather.getString("main");
-                            description = jsonObjectForWeather.getString("description");
+                            WeatherInformation.this.weatherType = jsonObjectForWeather.getString("main");
+                            WeatherInformation.this.description = jsonObjectForWeather.getString("description");
                             JSONObject jsonObjectForTempPress = response.getJSONObject("main");
-                            tempareture = jsonObjectForTempPress.getString("temp");
-                            pressure = jsonObjectForTempPress.getString("pressure");
-                            humidity = jsonObjectForTempPress.getString("humidity");
-                            date = response.getString("dt");
+                            WeatherInformation.this.tempareture = jsonObjectForTempPress.getString("temp");
+                            WeatherInformation.this.pressure = jsonObjectForTempPress.getString("pressure");
+                            WeatherInformation.this.humidity = jsonObjectForTempPress.getString("humidity");
+                            WeatherInformation.this.date = response.getString("dt");
                             JSONObject jsonObjectForSys = response.getJSONObject("sys");
-                            sunrise = jsonObjectForSys.getString("sunrise");
-                            sunset = jsonObjectForSys.getString("sunset");
-                            //----------------------------------------------------
-                            longSunrise = Long.parseLong(sunrise);
-                             longAdditionalSunrise=longSunrise+1800000;
-                            longSunset = Long.parseLong(sunset);
-                            longAdditionalSunset=longSunset+1800000;
-                            longNoon=longSunrise+21600000;//6 hours
-                            longAdditionalNoon=longNoon+1800000;
+                            WeatherInformation.this.sunrise = jsonObjectForSys.getString("sunrise");
+                            WeatherInformation.this.sunset = jsonObjectForSys.getString("sunset");
+//------------------------------------------------------------------------------------------------
+                            WeatherInformation.this.longSunrise = Long.parseLong(WeatherInformation.this.sunrise);
+                            WeatherInformation.this.longAdditionalSunrise = WeatherInformation.this.longSunrise + 3600000;
+                            WeatherInformation.this.longSunset = Long.parseLong(WeatherInformation.this.sunset);
+                            WeatherInformation.this.longAdditionalSunset = WeatherInformation.this.longSunset + 3600000;
+                            WeatherInformation.this.longNoon = WeatherInformation.this.longSunrise + 21600000;//6 hours
+                            WeatherInformation.this.longAdditionalNoon = WeatherInformation.this.longNoon + 3600000;
+                            long currentTime = System.currentTimeMillis();
 
+//---------------------------------------------------------------------------------------------
 
-                            if ((System.currentTimeMillis()>longSunrise)&&(System.currentTimeMillis()<longAdditionalSunrise)) {
+                            String t = "1564169673816";
+                            long testTime = Long.parseLong(t) + 70000;
+                            long time = System.currentTimeMillis();
+                            if ((time >= Long.parseLong(t)) && (time <= testTime)) {
                                 breakFastNotification();
-
                             }
-                            if ((System.currentTimeMillis()>longNoon)&&(System.currentTimeMillis()<longAdditionalNoon)) {
+
+                           /* if ((currentTime >= longSunrise) && (currentTime <= longAdditionalSunrise)) {
+                                breakFastNotification();
+                            }
+
+
+                            if ((currentTime >= longNoon) && (currentTime <= longAdditionalNoon)) {
                                 lunchNotification();
-
                             }
-                           if ((System.currentTimeMillis()>longSunset)&&(System.currentTimeMillis()<longAdditionalSunset)) {
+
+                            if ((currentTime >= longSunset) && (currentTime <= longAdditionalSunset)) {
                                 dinnerNotification();
-
-                            }
-
-
-
-
+                            }*/
 
 
                             Log.d("ll", "Lat : " + valueLatitude + ",  Lon : " + valueLongitude);
-                            Log.d("weather", "weather : " + weatherType + ", " + description);
-                            Log.d("main", "temp : " + tempareture + ", " + pressure + ", " + humidity);
-                            Log.d("dt", "date : " + date);
-                            Log.d("sys", "sunrise : " + sunrise + ", sunset : " + sunset);
+                            Log.d("weather", "weather type : " + WeatherInformation.this.weatherType + ", " + WeatherInformation.this.description);
+                            Log.d("main", "temp : " + WeatherInformation.this.tempareture + ", " + WeatherInformation.this.pressure + ", " + WeatherInformation.this.humidity);
+                            Log.d("dt", "date : " + WeatherInformation.this.date);
+                            Log.d("sys", "sunrise : " + WeatherInformation.this.sunrise + ", sunset : " + WeatherInformation.this.sunset);
                             Log.d("t", "onResponse: " + System.currentTimeMillis());
 
                         } catch (JSONException e) {
@@ -196,18 +199,22 @@ public class WeatherInformation extends Activity {
     }
 
     //------------------------------------------------------------------------------------------------
+
     private void breakFastNotification() {
         createNotificationChannel();
 
         Intent cintent = new Intent(WeatherInformation.this, MainActivity.class);
         cintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
+       Bundle bundle=new Bundle();
+        bundle.putString("sunrise",sunrise);
+        cintent.putExtras(bundle);
         PendingIntent pendingIntent = PendingIntent.getActivity(WeatherInformation.this, 0, cintent, 0);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(WeatherInformation.this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_splash_info)
-                .setContentTitle("BreakFast")
-                .setContentText(description)
+                .setContentTitle(WeatherInformation.this.weatherType)
+                .setContentText(WeatherInformation.this.description)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
@@ -251,6 +258,7 @@ public class WeatherInformation extends Activity {
 
     }
 
+
     //------------------------------------------------------------------------------------------------
     private void dinnerNotification() {
         createNotificationChannel();
@@ -278,7 +286,7 @@ public class WeatherInformation extends Activity {
 
 
     }
-//-------------------------------------------------------------------------------------
+
 //-------------------------------------------------------------------------------------
 
     private void createNotificationChannel() {
