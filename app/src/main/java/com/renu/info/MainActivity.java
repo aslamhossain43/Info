@@ -13,21 +13,47 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
     private ListView mainListViewId;
     private String[] foodNames;
+    private String[] finalFoodNames;
     private int[] foodImages = {R.drawable.egg, R.drawable.banana};
-    private TextView routinTextViewId;
-
+    private TextView routinTextView;
+//----------------------------------------------------------------------------------------------
+String weatherType;
+    String description;
+    String temperature;
+    String pressure;
+    String humidity;
+    String date;
+    String sunrise;
+    String sunset;
+    //---------------------------------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mainListViewId = findViewById(R.id.mainListViewId);
-        routinTextViewId = findViewById(R.id.routinTextViewId);
+        routinTextView = findViewById(R.id.routinTextViewId);
         foodNames = getResources().getStringArray(R.array.food_names);
- //-------------------------------------------------------------------------------------------
+
+        //-------------------------------------------------------------------------------------------
  //GET FROM WeatherINformation Activity
        Bundle bundle = getIntent().getExtras();
-        String sunrise=bundle.getString("sunrise");
-        Log.d("sss", "onCreate: "+sunrise);
+        this.weatherType=bundle.getString("weatherType");
+        this.description=bundle.getString("description");
+        this.temperature=bundle.getString("temperature");
+        this.pressure=bundle.getString("pressure");
+        this.humidity=bundle.getString("humidity");
+        this.date=bundle.getString("date");
+        this.sunrise=bundle.getString("sunrise");
+        this.sunset=bundle.getString("sunset");
+        Log.d("sss", "onCreate: "+this.description+", "+this.sunrise+", "+this.sunset+", "+this.weatherType);
+   //-----------------------------------------------------------------------------------------------
+       // Data adding by condition
+
+
+
+
+
+
  //--------------------------------------------------------------------------------------------
         CustomFoodAdapter customFoodAdapter = new CustomFoodAdapter(this, foodNames, foodImages);
         mainListViewId.setAdapter(customFoodAdapter);

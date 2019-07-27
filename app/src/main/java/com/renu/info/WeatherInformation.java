@@ -49,7 +49,7 @@ public class WeatherInformation extends Activity {
     String valueLongitude;
     String weatherType;
     String description;
-    String tempareture;
+    String temperature;
     String pressure;
     String humidity;
     String date;
@@ -135,7 +135,7 @@ public class WeatherInformation extends Activity {
                             WeatherInformation.this.weatherType = jsonObjectForWeather.getString("main");
                             WeatherInformation.this.description = jsonObjectForWeather.getString("description");
                             JSONObject jsonObjectForTempPress = response.getJSONObject("main");
-                            WeatherInformation.this.tempareture = jsonObjectForTempPress.getString("temp");
+                            WeatherInformation.this.temperature = jsonObjectForTempPress.getString("temp");
                             WeatherInformation.this.pressure = jsonObjectForTempPress.getString("pressure");
                             WeatherInformation.this.humidity = jsonObjectForTempPress.getString("humidity");
                             WeatherInformation.this.date = response.getString("dt");
@@ -153,7 +153,7 @@ public class WeatherInformation extends Activity {
 
 //---------------------------------------------------------------------------------------------
 
-                            String t = "1564169673816";
+                            String t = "1564213785823";
                             long testTime = Long.parseLong(t) + 70000;
                             long time = System.currentTimeMillis();
                             if ((time >= Long.parseLong(t)) && (time <= testTime)) {
@@ -176,7 +176,7 @@ public class WeatherInformation extends Activity {
 
                             Log.d("ll", "Lat : " + valueLatitude + ",  Lon : " + valueLongitude);
                             Log.d("weather", "weather type : " + WeatherInformation.this.weatherType + ", " + WeatherInformation.this.description);
-                            Log.d("main", "temp : " + WeatherInformation.this.tempareture + ", " + WeatherInformation.this.pressure + ", " + WeatherInformation.this.humidity);
+                            Log.d("main", "temp : " + WeatherInformation.this.temperature + ", " + WeatherInformation.this.pressure + ", " + WeatherInformation.this.humidity);
                             Log.d("dt", "date : " + WeatherInformation.this.date);
                             Log.d("sys", "sunrise : " + WeatherInformation.this.sunrise + ", sunset : " + WeatherInformation.this.sunset);
                             Log.d("t", "onResponse: " + System.currentTimeMillis());
@@ -206,10 +206,21 @@ public class WeatherInformation extends Activity {
         Intent cintent = new Intent(WeatherInformation.this, MainActivity.class);
         cintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
+        //sending data to another activity
        Bundle bundle=new Bundle();
-        bundle.putString("sunrise",sunrise);
+       bundle.putString("weatherType",WeatherInformation.this.weatherType);
+       bundle.putString("description",WeatherInformation.this.description);
+       bundle.putString("temperature",WeatherInformation.this.temperature);
+       bundle.putString("pressure",WeatherInformation.this.pressure);
+       bundle.putString("humidity",WeatherInformation.this.humidity);
+       bundle.putString("date",WeatherInformation.this.date);
+        bundle.putString("sunrise",WeatherInformation.this.sunrise);
+        bundle.putString("sunset",WeatherInformation.this.sunset);
+
         cintent.putExtras(bundle);
-        PendingIntent pendingIntent = PendingIntent.getActivity(WeatherInformation.this, 0, cintent, 0);
+//--------------------------------------------
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(WeatherInformation.this, 0, cintent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(WeatherInformation.this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_splash_info)
@@ -237,7 +248,22 @@ public class WeatherInformation extends Activity {
         Intent cintent = new Intent(WeatherInformation.this, MainActivity.class);
         cintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(WeatherInformation.this, 0, cintent, 0);
+        //sending data to another activity
+        Bundle bundle=new Bundle();
+        bundle.putString("weatherType",WeatherInformation.this.weatherType);
+        bundle.putString("description",WeatherInformation.this.description);
+        bundle.putString("temperature",WeatherInformation.this.temperature);
+        bundle.putString("pressure",WeatherInformation.this.pressure);
+        bundle.putString("humidity",WeatherInformation.this.humidity);
+        bundle.putString("date",WeatherInformation.this.date);
+        bundle.putString("sunrise",WeatherInformation.this.sunrise);
+        bundle.putString("sunset",WeatherInformation.this.sunset);
+
+        cintent.putExtras(bundle);
+//--------------------------------------------
+
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(WeatherInformation.this, 0, cintent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(WeatherInformation.this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_splash_info)
@@ -266,7 +292,22 @@ public class WeatherInformation extends Activity {
         Intent cintent = new Intent(WeatherInformation.this, MainActivity.class);
         cintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(WeatherInformation.this, 0, cintent, 0);
+        //sending data to another activity
+        Bundle bundle=new Bundle();
+        bundle.putString("weatherType",WeatherInformation.this.weatherType);
+        bundle.putString("description",WeatherInformation.this.description);
+        bundle.putString("temperature",WeatherInformation.this.temperature);
+        bundle.putString("pressure",WeatherInformation.this.pressure);
+        bundle.putString("humidity",WeatherInformation.this.humidity);
+        bundle.putString("date",WeatherInformation.this.date);
+        bundle.putString("sunrise",WeatherInformation.this.sunrise);
+        bundle.putString("sunset",WeatherInformation.this.sunset);
+
+        cintent.putExtras(bundle);
+//--------------------------------------------
+
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(WeatherInformation.this, 0, cintent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(WeatherInformation.this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_splash_info)
