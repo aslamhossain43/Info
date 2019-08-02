@@ -45,8 +45,8 @@ public class WeatherInformation extends Activity {
     private double currentLongitude;
     String url = "https://api.openweathermap.org/data/2.5/weather?lat=" + currentLatitude + "&lon=" + currentLongitude + "&appid=" + API_KEY;
     //----------------------------------------------------------------------------------------------
-    String valueLatitude;
-    String valueLongitude;
+    //int valueLatitude;
+    //int valueLongitude;
     String weatherType;
     String description;
     String temperature;
@@ -55,6 +55,7 @@ public class WeatherInformation extends Activity {
     String date;
     String sunrise;
     String sunset;
+    String name;
     //------------------------------
     long longSunrise;
     long longAdditionalSunrise;
@@ -128,8 +129,8 @@ public class WeatherInformation extends Activity {
                     public void onResponse(JSONObject response) {
                         try {
                             JSONObject jsonObjectForLatLon = response.getJSONObject("coord");
-                            WeatherInformation.this.valueLatitude = jsonObjectForLatLon.getString("lat");
-                            WeatherInformation.this.valueLongitude = jsonObjectForLatLon.getString("lon");
+                            //WeatherInformation.this.valueLatitude = jsonObjectForLatLon.getInt("lat");
+                            //WeatherInformation.this.valueLongitude = jsonObjectForLatLon.getInt("lon");
                             JSONArray jsonArrayForWeather = response.getJSONArray("weather");
                             JSONObject jsonObjectForWeather = jsonArrayForWeather.getJSONObject(0);
                             WeatherInformation.this.weatherType = jsonObjectForWeather.getString("main");
@@ -142,6 +143,7 @@ public class WeatherInformation extends Activity {
                             JSONObject jsonObjectForSys = response.getJSONObject("sys");
                             WeatherInformation.this.sunrise = jsonObjectForSys.getString("sunrise");
                             WeatherInformation.this.sunset = jsonObjectForSys.getString("sunset");
+                            WeatherInformation.this.name=response.getString("name");
 //------------------------------------------------------------------------------------------------
                             WeatherInformation.this.longSunrise = Long.parseLong(WeatherInformation.this.sunrise);
                             WeatherInformation.this.longAdditionalSunrise = WeatherInformation.this.longSunrise + 3600000;
@@ -153,7 +155,7 @@ public class WeatherInformation extends Activity {
 
 //---------------------------------------------------------------------------------------------
 
-                            String t = "1564213785823";
+                            String t = "1564739791060";
                             long testTime = Long.parseLong(t) + 70000;
                             long time = System.currentTimeMillis();
                             if ((time >= Long.parseLong(t)) && (time <= testTime)) {
@@ -174,11 +176,13 @@ public class WeatherInformation extends Activity {
                             }*/
 
 
-                            Log.d("ll", "Lat : " + valueLatitude + ",  Lon : " + valueLongitude);
+                            Log.d("ll", "Lat : " + WeatherInformation.this.currentLatitude + ",  Lon : " + WeatherInformation.this.currentLongitude);
                             Log.d("weather", "weather type : " + WeatherInformation.this.weatherType + ", " + WeatherInformation.this.description);
                             Log.d("main", "temp : " + WeatherInformation.this.temperature + ", " + WeatherInformation.this.pressure + ", " + WeatherInformation.this.humidity);
                             Log.d("dt", "date : " + WeatherInformation.this.date);
                             Log.d("sys", "sunrise : " + WeatherInformation.this.sunrise + ", sunset : " + WeatherInformation.this.sunset);
+                            Log.d("sys", "name : " + WeatherInformation.this.name);
+
                             Log.d("t", "onResponse: " + System.currentTimeMillis());
 
                         } catch (JSONException e) {
@@ -216,6 +220,7 @@ public class WeatherInformation extends Activity {
        bundle.putString("date",WeatherInformation.this.date);
         bundle.putString("sunrise",WeatherInformation.this.sunrise);
         bundle.putString("sunset",WeatherInformation.this.sunset);
+        bundle.putString("name",WeatherInformation.this.name);
 
         cintent.putExtras(bundle);
 //--------------------------------------------

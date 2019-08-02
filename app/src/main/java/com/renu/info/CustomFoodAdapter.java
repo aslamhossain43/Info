@@ -10,18 +10,18 @@ import android.widget.TextView;
 
 public class CustomFoodAdapter extends BaseAdapter {
     private Context context;
-    private String[] foodNames;
-    private int[]foodImages;
+    private String[] breakfast;
+    private int[] breakfastImages;
 private LayoutInflater layoutInflater;
-    public CustomFoodAdapter(Context context, String[] foodNames, int[] foodImages) {
+    public CustomFoodAdapter(Context context, String[] breakfast, int[] breakfastImages) {
         this.context = context;
-        this.foodNames = foodNames;
-        this.foodImages = foodImages;
+        this.breakfast = breakfast;
+        this.breakfastImages = breakfastImages;
     }
 
     @Override
     public int getCount() {
-        return foodNames.length;
+        return breakfast.length;
     }
 
     @Override
@@ -45,8 +45,8 @@ convertView=layoutInflater.inflate(R.layout.food_view,parent,false);
         }
         ImageView imageView=convertView.findViewById(R.id.foodImageViewId);
         TextView textView=convertView.findViewById(R.id.foodNameTextViewId);
-        imageView.setImageResource(foodImages[position]);
-        textView.setText(foodNames[position]);
+        imageView.setImageResource(breakfastImages[position]);
+        textView.setText(breakfast[position]);
 
 
 

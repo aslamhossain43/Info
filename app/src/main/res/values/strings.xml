@@ -5,10 +5,21 @@
     <string name="splash_alert_yes">Yes</string>
     <string name="splash_alert_cancel">Cancel</string>
 
-    <string-array name="food_names">
+    <string-array name="breakfast">
         <item>Egg</item>
         <item>Banana</item>
-
+        <item>Greek Yogurt</item>
+        <item>Coffee</item>
+        <item>Outmeal</item>
+        <item>Chia Seeds</item>
+        <item>Berries</item>
+        <item>Nuts</item>
+        <item>Green Tea</item>
+        <item>Chicken</item>
+        <item>Fish</item>
+        <item>Meat</item>
+        <item>Cottage Cheese</item>
+        <item>Flax Seeds</item>
 
     </string-array>
 
