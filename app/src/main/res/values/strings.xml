@@ -5,7 +5,7 @@
     <string name="splash_alert_yes">Yes</string>
     <string name="splash_alert_cancel">Cancel</string>
 
-    <string-array name="breakfast">
+    <string-array name="foods">
         <item>Egg</item>
         <item>Banana</item>
         <item>Greek Yogurt</item>
@@ -20,6 +20,14 @@
         <item>Meat</item>
         <item>Cottage Cheese</item>
         <item>Flax Seeds</item>
+        <item>Paratha</item>
+        <item>Kachchi Biryani</item>
+        <item>Chicken Pilaf</item>
+        <item>Grilled Chicken</item>
+        <item>Sheek Kabab</item>
+        <item>Mixed Vegetable</item>
+        <item>Shrimp With Vegetable</item>
+        <item>Milk</item>
 
     </string-array>
 

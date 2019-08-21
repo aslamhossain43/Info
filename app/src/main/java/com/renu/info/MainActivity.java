@@ -21,7 +21,9 @@ public class MainActivity extends AppCompatActivity {
     private Integer[] breakfastImages = {R.drawable.egg, R.drawable.banana, R.drawable.greek_yogurt
             , R.drawable.coffee, R.drawable.oats, R.drawable.chia_seeds, R.drawable.berries
             , R.drawable.nuts, R.drawable.green_tea, R.drawable.cooked_chicken, R.drawable.cooked_fish
-            , R.drawable.cooked_meat, R.drawable.cottage_cheese, R.drawable.flax_seeds};
+            , R.drawable.cooked_meat, R.drawable.cottage_cheese, R.drawable.flax_seeds, R.drawable.paratha
+            , R.drawable.kachchi_biryani, R.drawable.chicken_pilaf, R.drawable.grilled_chicken, R.drawable.sheek_kabab
+            , R.drawable.mixed_vegetables, R.drawable.shrimp_with_vegetable, R.drawable.milk};
     private int[] finalBreakfastImages;
     private TextView routinTextView;
     //----------------------------------------------------------------------------------------------
@@ -71,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
         mainListViewId = findViewById(R.id.mainListViewId);
         routinTextView = findViewById(R.id.routinTextViewId);
-        breakfast = getResources().getStringArray(R.array.breakfast);
+        breakfast = getResources().getStringArray(R.array.foods);
     }
 
     public void getBundleDataFromWeatherInfo() {
@@ -95,6 +97,65 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    public void breakFastData5_8Degree() {
+        List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
+        List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
+
+        breakfast.remove(1);
+        breakfast.remove(2);
+        breakfast.remove(4);
+        breakfast.remove(5);
+        breakfast.remove(6);
+        breakfast.remove(12);
+        breakfast.remove(13);
+        breakfast.remove(15);
+        breakfastImages.remove(1);
+        breakfastImages.remove(2);
+        breakfastImages.remove(4);
+        breakfastImages.remove(5);
+        breakfastImages.remove(6);
+        breakfastImages.remove(12);
+        breakfastImages.remove(13);
+        breakfastImages.remove(15);
+
+        this.finalBreakfast = breakfast.toArray(new String[breakfast.size()]);
+
+        this.finalBreakfastImages = breakfastImages.stream().mapToInt(Integer::intValue).toArray();
+
+
+    }
+
+    public void breakFastData9_11Degree() {
+        List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
+        List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
+
+        breakfast.remove(1);
+        breakfast.remove(2);
+        breakfast.remove(4);
+        breakfast.remove(5);
+        breakfast.remove(6);
+        breakfast.remove(12);
+        breakfast.remove(13);
+        breakfast.remove(15);
+        breakfastImages.remove(1);
+        breakfastImages.remove(2);
+        breakfastImages.remove(4);
+        breakfastImages.remove(5);
+        breakfastImages.remove(6);
+        breakfastImages.remove(12);
+        breakfastImages.remove(13);
+        breakfastImages.remove(15);
+
+        this.finalBreakfast = breakfast.toArray(new String[breakfast.size()]);
+
+        this.finalBreakfastImages = breakfastImages.stream().mapToInt(Integer::intValue).toArray();
+
+
+    }
+
+
+
     public void breakFastDataUnder25Degree() {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
@@ -107,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
         breakfastImages.remove(6);
 
         this.finalBreakfast = breakfast.toArray(new String[breakfast.size()]);
-        ;
+
         this.finalBreakfastImages = breakfastImages.stream().mapToInt(Integer::intValue).toArray();
 
 
@@ -118,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
         this.finalBreakfast = breakfast.toArray(new String[breakfast.size()]);
-        ;
+
         this.finalBreakfastImages = breakfastImages.stream().mapToInt(Integer::intValue).toArray();
 
 
@@ -134,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         this.finalBreakfast = breakfast.toArray(new String[breakfast.size()]);
-        ;
+
         this.finalBreakfastImages = breakfastImages.stream().mapToInt(Integer::intValue).toArray();
 
 
