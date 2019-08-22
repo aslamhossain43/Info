@@ -69,7 +69,7 @@ public class SplashActivity extends AppCompatActivity {
         }
 
 // to minimize activity
-        //  this.moveTaskToBack(true);
+         this.moveTaskToBack(true);
     }
 
 

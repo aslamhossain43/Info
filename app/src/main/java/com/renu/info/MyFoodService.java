@@ -44,7 +44,7 @@ public class MyFoodService extends Service {
                     startActivity(intent);
 
 
-                    Toast.makeText(MyFoodService.this, "Service is running", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(MyFoodService.this, "Service is running", Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -61,7 +61,7 @@ public class MyFoodService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(this, "onStartCommand()", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "onStartCommand()", Toast.LENGTH_SHORT).show();
 
         return START_STICKY;
 
@@ -73,7 +73,7 @@ public class MyFoodService extends Service {
     public void onDestroy() {
         super.onDestroy();
         mTimer.cancel();    //For Cancel Timer
-        Toast.makeText(this, "Service is Destroyed", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Service is Destroyed", Toast.LENGTH_SHORT).show();
 
 
     }

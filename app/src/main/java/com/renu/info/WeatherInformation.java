@@ -155,7 +155,7 @@ public class WeatherInformation extends Activity {
 
 //---------------------------------------------------------------------------------------------
 
-                            String t = "1566447442825";
+                            String t = "1566504783650";
                             long testTime = Long.parseLong(t) + 70000;
                             long time = System.currentTimeMillis();
                             if ((time >= Long.parseLong(t)) && (time <= testTime)) {
@@ -221,6 +221,7 @@ public class WeatherInformation extends Activity {
         bundle.putString("sunrise",WeatherInformation.this.sunrise);
         bundle.putString("sunset",WeatherInformation.this.sunset);
         bundle.putString("name",WeatherInformation.this.name);
+        bundle.putString("menuFor","Breakfast");
 
         cintent.putExtras(bundle);
 //--------------------------------------------
@@ -229,8 +230,8 @@ public class WeatherInformation extends Activity {
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(WeatherInformation.this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_splash_info)
-                .setContentTitle(WeatherInformation.this.weatherType)
-                .setContentText(WeatherInformation.this.description)
+                .setContentTitle("Breakfast")
+                .setContentText("You Can Choose Your Breakfast Menu")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
@@ -263,7 +264,8 @@ public class WeatherInformation extends Activity {
         bundle.putString("date",WeatherInformation.this.date);
         bundle.putString("sunrise",WeatherInformation.this.sunrise);
         bundle.putString("sunset",WeatherInformation.this.sunset);
-
+        bundle.putString("name",WeatherInformation.this.name);
+        bundle.putString("menuFor","Lunch");
         cintent.putExtras(bundle);
 //--------------------------------------------
 
@@ -273,7 +275,7 @@ public class WeatherInformation extends Activity {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(WeatherInformation.this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_splash_info)
                 .setContentTitle("Lunch")
-                .setContentText(description)
+                .setContentText("You Can Choose Your Lunch Menu")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
@@ -307,7 +309,8 @@ public class WeatherInformation extends Activity {
         bundle.putString("date",WeatherInformation.this.date);
         bundle.putString("sunrise",WeatherInformation.this.sunrise);
         bundle.putString("sunset",WeatherInformation.this.sunset);
-
+        bundle.putString("name",WeatherInformation.this.name);
+        bundle.putString("menuFor","Dinner");
         cintent.putExtras(bundle);
 //--------------------------------------------
 
@@ -317,7 +320,7 @@ public class WeatherInformation extends Activity {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(WeatherInformation.this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_splash_info)
                 .setContentTitle("Dinner")
-                .setContentText(description)
+                .setContentText("You Can Choose Your Dinner Menu")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);

@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#87EE0F"
+    android:background="#6AC006"
     tools:context=".MainActivity">
     <TextView
         android:id="@+id/routinTextViewId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="Breakfast"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:gravity="center"
         android:layout_marginBottom="10dp"
@@ -23,7 +22,7 @@
         />
 
     <ListView
-        android:listSelector="#0CF816"
+        android:listSelector="#0DCC15"
         android:divider="#F5F4ED"
         android:dividerHeight="2dp"
         android:id="@+id/mainListViewId"

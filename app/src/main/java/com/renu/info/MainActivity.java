@@ -13,9 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-    private ListView mainListViewId;
+     private ListView mainListViewId;
     private String[] breakfast;
     private String[] finalBreakfast;
     private Integer[] breakfastImages = {R.drawable.egg, R.drawable.banana, R.drawable.greek_yogurt
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     String sunrise;
     String sunset;
     String name;
+    String menuFor;
 
     //----------------------------------------------------------------------------------------------
     @Override
@@ -86,6 +88,8 @@ temp5_8_Down_Degree();
             temp41_44_Up_Degree();
 
         }
+        //for heading
+        routinTextView.setText(menuFor);
         //Handle Custom adapter
         handleCustomAdapter();
 
@@ -110,6 +114,7 @@ temp5_8_Down_Degree();
         this.sunrise = bundle.getString("sunrise");
         this.sunset = bundle.getString("sunset");
         this.name = bundle.getString("name");
+        this.menuFor=bundle.getString("menuFor");
         Log.d("sss", "onCreate: " + this.description + ", " + this.sunrise + ", " + this.sunset + ", " + this.weatherType + " name : " + this.name);
     }
 
@@ -142,12 +147,11 @@ temp5_8_Down_Degree();
         breakfastImages.remove(13);
         breakfastImages.remove(15);
 
-        this.finalBreakfast = breakfast.toArray(new String[breakfast.size()]);
-
-        this.finalBreakfastImages = breakfastImages.stream().mapToInt(Integer::intValue).toArray();
-
+       generateRandomList(breakfast,breakfastImages);
 
     }
+
+
 
     public void temp9_12Degree() {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
@@ -170,10 +174,8 @@ temp5_8_Down_Degree();
         breakfastImages.remove(13);
         breakfastImages.remove(15);
 
-        this.finalBreakfast = breakfast.toArray(new String[breakfast.size()]);
 
-        this.finalBreakfastImages = breakfastImages.stream().mapToInt(Integer::intValue).toArray();
-
+        generateRandomList(breakfast,breakfastImages);
 
     }
 
@@ -198,10 +200,8 @@ temp5_8_Down_Degree();
         breakfastImages.remove(13);
         breakfastImages.remove(15);
 
-        this.finalBreakfast = breakfast.toArray(new String[breakfast.size()]);
 
-        this.finalBreakfastImages = breakfastImages.stream().mapToInt(Integer::intValue).toArray();
-
+        generateRandomList(breakfast,breakfastImages);
 
     }
 
@@ -218,10 +218,8 @@ temp5_8_Down_Degree();
         breakfastImages.remove(12);
         breakfastImages.remove(15);
 
-        this.finalBreakfast = breakfast.toArray(new String[breakfast.size()]);
 
-        this.finalBreakfastImages = breakfastImages.stream().mapToInt(Integer::intValue).toArray();
-
+        generateRandomList(breakfast,breakfastImages);
 
     }
 
@@ -236,10 +234,8 @@ temp5_8_Down_Degree();
         breakfastImages.remove(12);
         breakfastImages.remove(15);
 
-        this.finalBreakfast = breakfast.toArray(new String[breakfast.size()]);
 
-        this.finalBreakfastImages = breakfastImages.stream().mapToInt(Integer::intValue).toArray();
-
+        generateRandomList(breakfast,breakfastImages);
 
     }
 
@@ -250,9 +246,7 @@ temp5_8_Down_Degree();
         breakfast.remove(18);
         breakfastImages.remove(18);
 
-        this.finalBreakfast = breakfast.toArray(new String[breakfast.size()]);
-
-        this.finalBreakfastImages = breakfastImages.stream().mapToInt(Integer::intValue).toArray();
+        generateRandomList(breakfast,breakfastImages);
 
 
     }
@@ -264,10 +258,8 @@ temp5_8_Down_Degree();
         breakfast.remove(18);
         breakfastImages.remove(18);
 
-        this.finalBreakfast = breakfast.toArray(new String[breakfast.size()]);
 
-        this.finalBreakfastImages = breakfastImages.stream().mapToInt(Integer::intValue).toArray();
-
+        generateRandomList(breakfast,breakfastImages);
 
     }
     public void temp33_36Degree() {
@@ -285,10 +277,8 @@ temp5_8_Down_Degree();
         breakfastImages.remove(17);
         breakfastImages.remove(18);
 
-        this.finalBreakfast = breakfast.toArray(new String[breakfast.size()]);
 
-        this.finalBreakfastImages = breakfastImages.stream().mapToInt(Integer::intValue).toArray();
-
+        generateRandomList(breakfast,breakfastImages);
 
     }
     public void temp37_40Degree() {
@@ -310,9 +300,7 @@ temp5_8_Down_Degree();
         breakfastImages.remove(17);
         breakfastImages.remove(18);
 
-        this.finalBreakfast = breakfast.toArray(new String[breakfast.size()]);
-
-        this.finalBreakfastImages = breakfastImages.stream().mapToInt(Integer::intValue).toArray();
+        generateRandomList(breakfast,breakfastImages);
 
 
     }
@@ -335,13 +323,39 @@ temp5_8_Down_Degree();
         breakfastImages.remove(17);
         breakfastImages.remove(18);
 
-        this.finalBreakfast = breakfast.toArray(new String[breakfast.size()]);
 
-        this.finalBreakfastImages = breakfastImages.stream().mapToInt(Integer::intValue).toArray();
+        generateRandomList(breakfast,breakfastImages);
+
+    }
+    private void generateRandomList(List<String> breakfastInner, List<Integer> breakfastImagesInner) {
+        Random rand = new Random();
+
+        // create a temporary list for storing
+        // selected element
+        List<String> newListForBreakFast = new ArrayList<>();
+        List<Integer> newListForBreakFastImages = new ArrayList<>();
+        for (int i = 0; i <10; i++) {
+
+            // take a raundom index between 0 to size
+            // of given List
+            int randomIndex = rand.nextInt(breakfastInner.size());
+
+            // add element in temporary list
+            newListForBreakFast.add(breakfastInner.get(randomIndex));
+            // remove for avoid repeat
+            breakfastInner.remove(randomIndex);
+            newListForBreakFastImages.add(breakfastImagesInner.get(randomIndex));
+            // remove for avoid repeat
+            breakfastImagesInner.remove(randomIndex);
+        }
+
+        this.finalBreakfast = newListForBreakFast.toArray(new String[newListForBreakFast.size()]);
+
+        this.finalBreakfastImages = newListForBreakFastImages.stream().mapToInt(Integer::intValue).toArray();
+
 
 
     }
-
     public void handleCustomAdapter() {
         CustomFoodAdapter customFoodAdapter = new CustomFoodAdapter(this, this.finalBreakfast, this.finalBreakfastImages);
         mainListViewId.setAdapter(customFoodAdapter);
@@ -349,7 +363,7 @@ temp5_8_Down_Degree();
         mainListViewId.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String food_names = breakfast[position];
+                String food_names = finalBreakfast[position];
                 Toast.makeText(MainActivity.this, food_names, Toast.LENGTH_SHORT).show();
             }
         });
