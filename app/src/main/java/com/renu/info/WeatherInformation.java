@@ -155,7 +155,7 @@ public class WeatherInformation extends Activity {
 
 //---------------------------------------------------------------------------------------------
 
-                            String t = "1566406914899";
+                            String t = "1566447442825";
                             long testTime = Long.parseLong(t) + 70000;
                             long time = System.currentTimeMillis();
                             if ((time >= Long.parseLong(t)) && (time <= testTime)) {

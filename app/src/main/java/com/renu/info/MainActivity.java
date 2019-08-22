@@ -53,15 +53,38 @@ public class MainActivity extends AppCompatActivity {
         //Convert temp into Celciuas
         convertTemperatureIntoCelciuas();
         // Data adding by condition
-        if ((int) this.temperatureInCelciuas < 25) {
+        if (((int) this.temperatureInCelciuas <=5)&&((int) this.temperatureInCelciuas <=8)) {
+temp5_8_Down_Degree();
+        } else if (((int) this.temperatureInCelciuas <=9)&&((int) this.temperatureInCelciuas <=12)){
+            temp9_12Degree();
+        }
+        else if (((int) this.temperatureInCelciuas <=13)&&((int) this.temperatureInCelciuas <=16)){
+           temp13_16Degree();
+        }
+        else if (((int) this.temperatureInCelciuas <=17)&&((int) this.temperatureInCelciuas <=20)){
+            temp17_20Degree();
+        }
+        else if (((int) this.temperatureInCelciuas <=21)&&((int) this.temperatureInCelciuas <=24)){
+            temp21_24Degree();
+        }
+        else if (((int) this.temperatureInCelciuas <=25)&&((int) this.temperatureInCelciuas <=28)){
+            temp25_28Degree();
+        }
+        else if (((int) this.temperatureInCelciuas <=29)&&((int) this.temperatureInCelciuas <=32)){
+            temp29_32Degree();
+        }
+        else if (((int) this.temperatureInCelciuas <=33)&&((int) this.temperatureInCelciuas <=36)){
+            temp33_36Degree();
+        }
+        else if (((int) this.temperatureInCelciuas <=37)&&((int) this.temperatureInCelciuas <=40)){
+            temp37_40Degree();
+        }
+        else if (((int) this.temperatureInCelciuas <=41)&&((int) this.temperatureInCelciuas <=44)){
+            temp41_44_Up_Degree();
+        }
+        else {
+            temp41_44_Up_Degree();
 
-            breakFastDataUnder25Degree();
-        } else if (((int) this.temperatureInCelciuas >= 25) && ((int) this.temperatureInCelciuas <= 30)) {
-
-            breakFastDataBetween25To30Degree();
-        } else {
-
-            breakFastDataUpTo30Degree();
         }
         //Handle Custom adapter
         handleCustomAdapter();
@@ -98,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void breakFastData5_8Degree() {
+    public void temp5_8_Down_Degree() {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
 
@@ -126,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void breakFastData9_11Degree() {
+    public void temp9_12Degree() {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
 
@@ -154,18 +177,26 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
-    public void breakFastDataUnder25Degree() {
+    public void temp13_16Degree() {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
 
         breakfast.remove(1);
         breakfast.remove(2);
+        breakfast.remove(4);
+        breakfast.remove(5);
         breakfast.remove(6);
+        breakfast.remove(12);
+        breakfast.remove(13);
+        breakfast.remove(15);
         breakfastImages.remove(1);
         breakfastImages.remove(2);
+        breakfastImages.remove(4);
+        breakfastImages.remove(5);
         breakfastImages.remove(6);
+        breakfastImages.remove(12);
+        breakfastImages.remove(13);
+        breakfastImages.remove(15);
 
         this.finalBreakfast = breakfast.toArray(new String[breakfast.size()]);
 
@@ -174,10 +205,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void breakFastDataBetween25To30Degree() {
-
+    public void temp17_20Degree() {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
+
+        breakfast.remove(2);
+        breakfast.remove(6);
+        breakfast.remove(12);
+        breakfast.remove(15);
+        breakfastImages.remove(2);
+        breakfastImages.remove(6);
+        breakfastImages.remove(12);
+        breakfastImages.remove(15);
+
         this.finalBreakfast = breakfast.toArray(new String[breakfast.size()]);
 
         this.finalBreakfastImages = breakfastImages.stream().mapToInt(Integer::intValue).toArray();
@@ -185,14 +225,115 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void breakFastDataUpTo30Degree() {
+    public void temp21_24Degree() {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
 
-        breakfast.remove(0);
+        breakfast.remove(2);
+        breakfast.remove(12);
+        breakfast.remove(15);
+        breakfastImages.remove(2);
+        breakfastImages.remove(12);
+        breakfastImages.remove(15);
 
-        breakfastImages.remove(0);
+        this.finalBreakfast = breakfast.toArray(new String[breakfast.size()]);
 
+        this.finalBreakfastImages = breakfastImages.stream().mapToInt(Integer::intValue).toArray();
+
+
+    }
+
+    public void temp25_28Degree() {
+        List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
+        List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
+
+        breakfast.remove(18);
+        breakfastImages.remove(18);
+
+        this.finalBreakfast = breakfast.toArray(new String[breakfast.size()]);
+
+        this.finalBreakfastImages = breakfastImages.stream().mapToInt(Integer::intValue).toArray();
+
+
+    }
+
+    public void temp29_32Degree() {
+        List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
+        List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
+
+        breakfast.remove(18);
+        breakfastImages.remove(18);
+
+        this.finalBreakfast = breakfast.toArray(new String[breakfast.size()]);
+
+        this.finalBreakfastImages = breakfastImages.stream().mapToInt(Integer::intValue).toArray();
+
+
+    }
+    public void temp33_36Degree() {
+        List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
+        List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
+
+        breakfast.remove(1);
+        breakfast.remove(12);
+        breakfast.remove(14);
+        breakfast.remove(17);
+        breakfast.remove(18);
+        breakfastImages.remove(1);
+        breakfastImages.remove(12);
+        breakfastImages.remove(14);
+        breakfastImages.remove(17);
+        breakfastImages.remove(18);
+
+        this.finalBreakfast = breakfast.toArray(new String[breakfast.size()]);
+
+        this.finalBreakfastImages = breakfastImages.stream().mapToInt(Integer::intValue).toArray();
+
+
+    }
+    public void temp37_40Degree() {
+        List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
+        List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
+
+        breakfast.remove(1);
+        breakfast.remove(7);
+        breakfast.remove(12);
+        breakfast.remove(14);
+        breakfast.remove(16);
+        breakfast.remove(17);
+        breakfast.remove(18);
+        breakfastImages.remove(1);
+        breakfastImages.remove(7);
+        breakfastImages.remove(12);
+        breakfastImages.remove(14);
+        breakfastImages.remove(16);
+        breakfastImages.remove(17);
+        breakfastImages.remove(18);
+
+        this.finalBreakfast = breakfast.toArray(new String[breakfast.size()]);
+
+        this.finalBreakfastImages = breakfastImages.stream().mapToInt(Integer::intValue).toArray();
+
+
+    }
+    public void temp41_44_Up_Degree() {
+        List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
+        List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
+
+        breakfast.remove(1);
+        breakfast.remove(7);
+        breakfast.remove(12);
+        breakfast.remove(14);
+        breakfast.remove(16);
+        breakfast.remove(17);
+        breakfast.remove(18);
+        breakfastImages.remove(1);
+        breakfastImages.remove(7);
+        breakfastImages.remove(12);
+        breakfastImages.remove(14);
+        breakfastImages.remove(16);
+        breakfastImages.remove(17);
+        breakfastImages.remove(18);
 
         this.finalBreakfast = breakfast.toArray(new String[breakfast.size()]);
 
