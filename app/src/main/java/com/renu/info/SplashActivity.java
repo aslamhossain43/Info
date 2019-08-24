@@ -1,6 +1,7 @@
 package com.renu.info;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -27,22 +28,19 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         intiViews();
         initAll();
-
-
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 doWork();
 
-                 startService(new Intent(SplashActivity.this, MyFoodService.class));
-                /*Intent intent = new Intent(SplashActivity.this, WeatherInformation.class);
-                startActivity(intent);
-*/
+                startService(new Intent(SplashActivity.this, MyFoodService.class));
+
 
             }
         });
         thread.start();
     }
+
 
     private void initAll() {
 
@@ -59,9 +57,9 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public void doWork() {
-        for (progress = 10; progress <= 100; progress = progress + 10) {
+        for (progress = 1; progress <= 100; progress = progress + 1) {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(50);
                 progressBar.setProgress(progress);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -69,7 +67,7 @@ public class SplashActivity extends AppCompatActivity {
         }
 
 // to minimize activity
-         this.moveTaskToBack(true);
+      this.moveTaskToBack(true);
     }
 
 

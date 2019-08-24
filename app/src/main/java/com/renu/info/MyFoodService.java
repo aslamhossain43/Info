@@ -4,17 +4,15 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
 
 public class MyFoodService extends Service {
-    /*public static final int notify = 3000000;*/  //interval between two services(Here Service run every 5 Minute)
+    //public static final int notify = 3000000;  //interval between two services(Here Service run every 50 Minute)
     public static final int notify = 20000;  //interval between two services(Here Service run every 5 Minute)
     private Handler mHandler = new Handler();   //run on another Thread to avoid crash
     private Timer mTimer = null;    //timer handling
@@ -72,9 +70,7 @@ public class MyFoodService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mTimer.cancel();    //For Cancel Timer
-//        Toast.makeText(this, "Service is Destroyed", Toast.LENGTH_SHORT).show();
-
+        mTimer.cancel();
 
     }
 

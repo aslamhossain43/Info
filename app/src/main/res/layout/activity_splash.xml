@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/berries"
+    android:background="@drawable/icon"
     android:gravity="bottom|center"
     tools:context=".SplashActivity">
 
@@ -16,6 +16,6 @@
         android:layout_margin="80dp"
         android:backgroundTint="@color/colorPrimary"
 
-        android:progressTint="@color/colorPrimaryDark" />
+        android:progressTint="@color/colorAccent" />
 
 </LinearLayout>

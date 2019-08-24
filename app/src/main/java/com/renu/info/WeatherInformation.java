@@ -93,8 +93,7 @@ public class WeatherInformation extends Activity {
                     if (location != null) {
                         currentLatitude = location.getLatitude();
                         currentLongitude = location.getLongitude();
-                        Log.d("lt", "onSuccess: " + location.getLatitude() + " " + location.getLongitude());
-                    }
+                       }
                 }
             });
         } else {
@@ -114,11 +113,15 @@ public class WeatherInformation extends Activity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == 111 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            getDeviceCurrentLocation();
+
+        if (grantResults.length > 0) {
+
+
+            if (requestCode == 111 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getDeviceCurrentLocation();
+            }
         }
     }
-
     //--------------------------------------------------------------------------------------------
     private void getCurrentWeather() {
 
@@ -154,14 +157,13 @@ public class WeatherInformation extends Activity {
                             long currentTime = System.currentTimeMillis();
 
 //---------------------------------------------------------------------------------------------
-
-                            String t = "1566504783650";
+                            String t = "1566631486497";
                             long testTime = Long.parseLong(t) + 70000;
                             long time = System.currentTimeMillis();
                             if ((time >= Long.parseLong(t)) && (time <= testTime)) {
                                 breakFastNotification();
                             }
-
+//-----------------------------------------------------------------------------------------------
                            /* if ((currentTime >= longSunrise) && (currentTime <= longAdditionalSunrise)) {
                                 breakFastNotification();
                             }
@@ -174,7 +176,7 @@ public class WeatherInformation extends Activity {
                             if ((currentTime >= longSunset) && (currentTime <= longAdditionalSunset)) {
                                 dinnerNotification();
                             }*/
-
+//----------------------------------------------------------------------------------------------
 
                             Log.d("ll", "Lat : " + WeatherInformation.this.currentLatitude + ",  Lon : " + WeatherInformation.this.currentLongitude);
                             Log.d("weather", "weather type : " + WeatherInformation.this.weatherType + ", " + WeatherInformation.this.description);
@@ -184,6 +186,9 @@ public class WeatherInformation extends Activity {
                             Log.d("sys", "name : " + WeatherInformation.this.name);
 
                             Log.d("t", "onResponse: " + System.currentTimeMillis());
+
+//---------------------------------------------------------------------------------------------
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
