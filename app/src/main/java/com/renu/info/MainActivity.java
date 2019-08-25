@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-     private ListView mainListViewId;
+    private ListView mainListViewId;
     private String[] breakfast;
     private String[] finalBreakfast;
     private Integer[] breakfastImages = {R.drawable.egg, R.drawable.banana, R.drawable.greek_yogurt
@@ -55,36 +55,27 @@ public class MainActivity extends AppCompatActivity {
         //Convert temp into Celciuas
         convertTemperatureIntoCelciuas();
         // Data adding by condition
-        if (((int) this.temperatureInCelciuas <=5)&&((int) this.temperatureInCelciuas <=8)) {
-temp5_8_Down_Degree();
-        } else if (((int) this.temperatureInCelciuas <=9)&&((int) this.temperatureInCelciuas <=12)){
+        if (((int) this.temperatureInCelciuas <= 5) && ((int) this.temperatureInCelciuas <= 8)) {
+            temp5_8_Down_Degree();
+        } else if (((int) this.temperatureInCelciuas <= 9) && ((int) this.temperatureInCelciuas <= 12)) {
             temp9_12Degree();
-        }
-        else if (((int) this.temperatureInCelciuas <=13)&&((int) this.temperatureInCelciuas <=16)){
-           temp13_16Degree();
-        }
-        else if (((int) this.temperatureInCelciuas <=17)&&((int) this.temperatureInCelciuas <=20)){
+        } else if (((int) this.temperatureInCelciuas <= 13) && ((int) this.temperatureInCelciuas <= 16)) {
+            temp13_16Degree();
+        } else if (((int) this.temperatureInCelciuas <= 17) && ((int) this.temperatureInCelciuas <= 20)) {
             temp17_20Degree();
-        }
-        else if (((int) this.temperatureInCelciuas <=21)&&((int) this.temperatureInCelciuas <=24)){
+        } else if (((int) this.temperatureInCelciuas <= 21) && ((int) this.temperatureInCelciuas <= 24)) {
             temp21_24Degree();
-        }
-        else if (((int) this.temperatureInCelciuas <=25)&&((int) this.temperatureInCelciuas <=28)){
+        } else if (((int) this.temperatureInCelciuas <= 25) && ((int) this.temperatureInCelciuas <= 28)) {
             temp25_28Degree();
-        }
-        else if (((int) this.temperatureInCelciuas <=29)&&((int) this.temperatureInCelciuas <=32)){
+        } else if (((int) this.temperatureInCelciuas <= 29) && ((int) this.temperatureInCelciuas <= 32)) {
             temp29_32Degree();
-        }
-        else if (((int) this.temperatureInCelciuas <=33)&&((int) this.temperatureInCelciuas <=36)){
+        } else if (((int) this.temperatureInCelciuas <= 33) && ((int) this.temperatureInCelciuas <= 36)) {
             temp33_36Degree();
-        }
-        else if (((int) this.temperatureInCelciuas <=37)&&((int) this.temperatureInCelciuas <=40)){
+        } else if (((int) this.temperatureInCelciuas <= 37) && ((int) this.temperatureInCelciuas <= 40)) {
             temp37_40Degree();
-        }
-        else if (((int) this.temperatureInCelciuas <=41)&&((int) this.temperatureInCelciuas <=44)){
+        } else if (((int) this.temperatureInCelciuas <= 41) && ((int) this.temperatureInCelciuas <= 44)) {
             temp41_44_Up_Degree();
-        }
-        else {
+        } else {
             temp41_44_Up_Degree();
 
         }
@@ -114,7 +105,7 @@ temp5_8_Down_Degree();
         this.sunrise = bundle.getString("sunrise");
         this.sunset = bundle.getString("sunset");
         this.name = bundle.getString("name");
-        this.menuFor=bundle.getString("menuFor");
+        this.menuFor = bundle.getString("menuFor");
         Log.d("sss", "onCreate: " + this.description + ", " + this.sunrise + ", " + this.sunset + ", " + this.weatherType + " name : " + this.name);
     }
 
@@ -147,10 +138,9 @@ temp5_8_Down_Degree();
         breakfastImages.remove(13);
         breakfastImages.remove(15);
 
-       generateRandomList(breakfast,breakfastImages);
+        generateRandomList(breakfast, breakfastImages);
 
     }
-
 
 
     public void temp9_12Degree() {
@@ -175,7 +165,7 @@ temp5_8_Down_Degree();
         breakfastImages.remove(15);
 
 
-        generateRandomList(breakfast,breakfastImages);
+        generateRandomList(breakfast, breakfastImages);
 
     }
 
@@ -201,7 +191,7 @@ temp5_8_Down_Degree();
         breakfastImages.remove(15);
 
 
-        generateRandomList(breakfast,breakfastImages);
+        generateRandomList(breakfast, breakfastImages);
 
     }
 
@@ -219,7 +209,7 @@ temp5_8_Down_Degree();
         breakfastImages.remove(15);
 
 
-        generateRandomList(breakfast,breakfastImages);
+        generateRandomList(breakfast, breakfastImages);
 
     }
 
@@ -235,7 +225,7 @@ temp5_8_Down_Degree();
         breakfastImages.remove(15);
 
 
-        generateRandomList(breakfast,breakfastImages);
+        generateRandomList(breakfast, breakfastImages);
 
     }
 
@@ -246,7 +236,7 @@ temp5_8_Down_Degree();
         breakfast.remove(18);
         breakfastImages.remove(18);
 
-        generateRandomList(breakfast,breakfastImages);
+        generateRandomList(breakfast, breakfastImages);
 
 
     }
@@ -259,9 +249,10 @@ temp5_8_Down_Degree();
         breakfastImages.remove(18);
 
 
-        generateRandomList(breakfast,breakfastImages);
+        generateRandomList(breakfast, breakfastImages);
 
     }
+
     public void temp33_36Degree() {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
@@ -278,9 +269,10 @@ temp5_8_Down_Degree();
         breakfastImages.remove(18);
 
 
-        generateRandomList(breakfast,breakfastImages);
+        generateRandomList(breakfast, breakfastImages);
 
     }
+
     public void temp37_40Degree() {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
@@ -300,10 +292,11 @@ temp5_8_Down_Degree();
         breakfastImages.remove(17);
         breakfastImages.remove(18);
 
-        generateRandomList(breakfast,breakfastImages);
+        generateRandomList(breakfast, breakfastImages);
 
 
     }
+
     public void temp41_44_Up_Degree() {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
@@ -324,9 +317,10 @@ temp5_8_Down_Degree();
         breakfastImages.remove(18);
 
 
-        generateRandomList(breakfast,breakfastImages);
+        generateRandomList(breakfast, breakfastImages);
 
     }
+
     private void generateRandomList(List<String> breakfastInner, List<Integer> breakfastImagesInner) {
         Random rand = new Random();
 
@@ -334,7 +328,7 @@ temp5_8_Down_Degree();
         // selected element
         List<String> newListForBreakFast = new ArrayList<>();
         List<Integer> newListForBreakFastImages = new ArrayList<>();
-        for (int i = 0; i <10; i++) {
+        for (int i = 0; i < 10; i++) {
 
             // take a raundom index between 0 to size
             // of given List
@@ -349,13 +343,30 @@ temp5_8_Down_Degree();
             breakfastImagesInner.remove(randomIndex);
         }
 
-        this.finalBreakfast = newListForBreakFast.toArray(new String[newListForBreakFast.size()]);
 
-        this.finalBreakfastImages = newListForBreakFastImages.stream().mapToInt(Integer::intValue).toArray();
-
+        convertListIntoArray(newListForBreakFast, newListForBreakFastImages);
 
 
     }
+
+    public void convertListIntoArray(List<String> stringBreakfast, List<Integer> intBreakfastImages) {
+
+
+        this.finalBreakfast = stringBreakfast.toArray(new String[stringBreakfast.size()]);
+
+//convert List<Integer> into int[]
+        int size = intBreakfastImages.size();
+        int[] result = new int[size];
+        Integer[] temp = intBreakfastImages.toArray(new Integer[size]);
+        for (int n = 0; n < size; ++n) {
+            result[n] = temp[n];
+        }
+
+
+        this.finalBreakfastImages = result;
+
+    }
+
     public void handleCustomAdapter() {
         CustomFoodAdapter customFoodAdapter = new CustomFoodAdapter(this, this.finalBreakfast, this.finalBreakfastImages);
         mainListViewId.setAdapter(customFoodAdapter);

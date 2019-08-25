@@ -93,7 +93,7 @@ public class WeatherInformation extends Activity {
                     if (location != null) {
                         currentLatitude = location.getLatitude();
                         currentLongitude = location.getLongitude();
-                       }
+                    }
                 }
             });
         } else {
@@ -122,6 +122,7 @@ public class WeatherInformation extends Activity {
             }
         }
     }
+
     //--------------------------------------------------------------------------------------------
     private void getCurrentWeather() {
 
@@ -146,39 +147,40 @@ public class WeatherInformation extends Activity {
                             JSONObject jsonObjectForSys = response.getJSONObject("sys");
                             WeatherInformation.this.sunrise = jsonObjectForSys.getString("sunrise");
                             WeatherInformation.this.sunset = jsonObjectForSys.getString("sunset");
-                            WeatherInformation.this.name=response.getString("name");
+                            WeatherInformation.this.name = response.getString("name");
 //------------------------------------------------------------------------------------------------
                             WeatherInformation.this.longSunrise = Long.parseLong(WeatherInformation.this.sunrise);
                             WeatherInformation.this.longAdditionalSunrise = WeatherInformation.this.longSunrise + 3600000;
                             WeatherInformation.this.longSunset = Long.parseLong(WeatherInformation.this.sunset);
                             WeatherInformation.this.longAdditionalSunset = WeatherInformation.this.longSunset + 3600000;
-                            WeatherInformation.this.longNoon = WeatherInformation.this.longSunrise + 21600000;//6 hours
+                            WeatherInformation.this.longNoon = WeatherInformation.this.longSunrise + 18000000;//5 hours
                             WeatherInformation.this.longAdditionalNoon = WeatherInformation.this.longNoon + 3600000;
-                            long currentTime = System.currentTimeMillis();
+                            long currentTime = System.currentTimeMillis();//long not contains it
 
 //---------------------------------------------------------------------------------------------
-                            String t = "1566631486497";
-                            long testTime = Long.parseLong(t) + 70000;
+                            String t = "1566761046434";
+                            long testTime = Long.parseLong(t) + 60*60000;
                             long time = System.currentTimeMillis();
                             if ((time >= Long.parseLong(t)) && (time <= testTime)) {
                                 breakFastNotification();
                             }
+                            Log.d("ll", "onResponse: "+currentTime);
 //-----------------------------------------------------------------------------------------------
-                           /* if ((currentTime >= longSunrise) && (currentTime <= longAdditionalSunrise)) {
+                            /*if ((currentTime >= WeatherInformation.this.longSunrise) && (currentTime <= WeatherInformation.this.longAdditionalSunrise)) {
                                 breakFastNotification();
                             }
 
 
-                            if ((currentTime >= longNoon) && (currentTime <= longAdditionalNoon)) {
+                            if ((currentTime >= WeatherInformation.this.longNoon) && (currentTime <= WeatherInformation.this.longAdditionalNoon)) {
                                 lunchNotification();
                             }
 
-                            if ((currentTime >= longSunset) && (currentTime <= longAdditionalSunset)) {
+                            if ((currentTime >= WeatherInformation.this.longSunset) && (currentTime <= WeatherInformation.this.longAdditionalSunset)) {
                                 dinnerNotification();
                             }*/
 //----------------------------------------------------------------------------------------------
 
-                            Log.d("ll", "Lat : " + WeatherInformation.this.currentLatitude + ",  Lon : " + WeatherInformation.this.currentLongitude);
+                            Log.d("l", "Lat : " + WeatherInformation.this.currentLatitude + ",  Lon : " + WeatherInformation.this.currentLongitude);
                             Log.d("weather", "weather type : " + WeatherInformation.this.weatherType + ", " + WeatherInformation.this.description);
                             Log.d("main", "temp : " + WeatherInformation.this.temperature + ", " + WeatherInformation.this.pressure + ", " + WeatherInformation.this.humidity);
                             Log.d("dt", "date : " + WeatherInformation.this.date);
@@ -216,17 +218,17 @@ public class WeatherInformation extends Activity {
         cintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         //sending data to another activity
-       Bundle bundle=new Bundle();
-       bundle.putString("weatherType",WeatherInformation.this.weatherType);
-       bundle.putString("description",WeatherInformation.this.description);
-       bundle.putString("temperature",WeatherInformation.this.temperature);
-       bundle.putString("pressure",WeatherInformation.this.pressure);
-       bundle.putString("humidity",WeatherInformation.this.humidity);
-       bundle.putString("date",WeatherInformation.this.date);
-        bundle.putString("sunrise",WeatherInformation.this.sunrise);
-        bundle.putString("sunset",WeatherInformation.this.sunset);
-        bundle.putString("name",WeatherInformation.this.name);
-        bundle.putString("menuFor","Breakfast");
+        Bundle bundle = new Bundle();
+        bundle.putString("weatherType", WeatherInformation.this.weatherType);
+        bundle.putString("description", WeatherInformation.this.description);
+        bundle.putString("temperature", WeatherInformation.this.temperature);
+        bundle.putString("pressure", WeatherInformation.this.pressure);
+        bundle.putString("humidity", WeatherInformation.this.humidity);
+        bundle.putString("date", WeatherInformation.this.date);
+        bundle.putString("sunrise", WeatherInformation.this.sunrise);
+        bundle.putString("sunset", WeatherInformation.this.sunset);
+        bundle.putString("name", WeatherInformation.this.name);
+        bundle.putString("menuFor", "Breakfast");
 
         cintent.putExtras(bundle);
 //--------------------------------------------
@@ -260,17 +262,17 @@ public class WeatherInformation extends Activity {
         cintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         //sending data to another activity
-        Bundle bundle=new Bundle();
-        bundle.putString("weatherType",WeatherInformation.this.weatherType);
-        bundle.putString("description",WeatherInformation.this.description);
-        bundle.putString("temperature",WeatherInformation.this.temperature);
-        bundle.putString("pressure",WeatherInformation.this.pressure);
-        bundle.putString("humidity",WeatherInformation.this.humidity);
-        bundle.putString("date",WeatherInformation.this.date);
-        bundle.putString("sunrise",WeatherInformation.this.sunrise);
-        bundle.putString("sunset",WeatherInformation.this.sunset);
-        bundle.putString("name",WeatherInformation.this.name);
-        bundle.putString("menuFor","Lunch");
+        Bundle bundle = new Bundle();
+        bundle.putString("weatherType", WeatherInformation.this.weatherType);
+        bundle.putString("description", WeatherInformation.this.description);
+        bundle.putString("temperature", WeatherInformation.this.temperature);
+        bundle.putString("pressure", WeatherInformation.this.pressure);
+        bundle.putString("humidity", WeatherInformation.this.humidity);
+        bundle.putString("date", WeatherInformation.this.date);
+        bundle.putString("sunrise", WeatherInformation.this.sunrise);
+        bundle.putString("sunset", WeatherInformation.this.sunset);
+        bundle.putString("name", WeatherInformation.this.name);
+        bundle.putString("menuFor", "Lunch");
         cintent.putExtras(bundle);
 //--------------------------------------------
 
@@ -305,17 +307,17 @@ public class WeatherInformation extends Activity {
         cintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         //sending data to another activity
-        Bundle bundle=new Bundle();
-        bundle.putString("weatherType",WeatherInformation.this.weatherType);
-        bundle.putString("description",WeatherInformation.this.description);
-        bundle.putString("temperature",WeatherInformation.this.temperature);
-        bundle.putString("pressure",WeatherInformation.this.pressure);
-        bundle.putString("humidity",WeatherInformation.this.humidity);
-        bundle.putString("date",WeatherInformation.this.date);
-        bundle.putString("sunrise",WeatherInformation.this.sunrise);
-        bundle.putString("sunset",WeatherInformation.this.sunset);
-        bundle.putString("name",WeatherInformation.this.name);
-        bundle.putString("menuFor","Dinner");
+        Bundle bundle = new Bundle();
+        bundle.putString("weatherType", WeatherInformation.this.weatherType);
+        bundle.putString("description", WeatherInformation.this.description);
+        bundle.putString("temperature", WeatherInformation.this.temperature);
+        bundle.putString("pressure", WeatherInformation.this.pressure);
+        bundle.putString("humidity", WeatherInformation.this.humidity);
+        bundle.putString("date", WeatherInformation.this.date);
+        bundle.putString("sunrise", WeatherInformation.this.sunrise);
+        bundle.putString("sunset", WeatherInformation.this.sunset);
+        bundle.putString("name", WeatherInformation.this.name);
+        bundle.putString("menuFor", "Dinner");
         cintent.putExtras(bundle);
 //--------------------------------------------
 
