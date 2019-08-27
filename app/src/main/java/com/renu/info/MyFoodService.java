@@ -12,8 +12,8 @@ import java.util.TimerTask;
 
 
 public class MyFoodService extends Service {
-    //public static final int notify = 3000000;  //interval between two services(Here Service run every 50 Minute)
-    public static final int notify = 60000;  //interval between two services(Here Service run every 20 seconds)
+    public static final int notify = 3000000;  //interval between two services(Here Service run every 50 Minute)
+    //public static final int notify = 10000;  //interval between two services(Here Service run every 20 seconds)
     private Handler mHandler = new Handler();   //run on another Thread to avoid crash
     private Timer mTimer = null;    //timer handling
 
@@ -42,7 +42,6 @@ public class MyFoodService extends Service {
                     startActivity(intent);
 
 
-//                    Toast.makeText(MyFoodService.this, "Service is running", Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -59,7 +58,6 @@ public class MyFoodService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-//        Toast.makeText(this, "onStartCommand()", Toast.LENGTH_SHORT).show();
 
         return START_STICKY;
 

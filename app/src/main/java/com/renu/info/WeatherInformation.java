@@ -68,6 +68,9 @@ public class WeatherInformation extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // to minimize activity
+        this.moveTaskToBack(true);
+
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
 
@@ -133,63 +136,48 @@ public class WeatherInformation extends Activity {
                     public void onResponse(JSONObject response) {
                         try {
                             JSONObject jsonObjectForLatLon = response.getJSONObject("coord");
-                            //WeatherInformation.this.valueLatitude = jsonObjectForLatLon.getInt("lat");
-                            //WeatherInformation.this.valueLongitude = jsonObjectForLatLon.getInt("lon");
                             JSONArray jsonArrayForWeather = response.getJSONArray("weather");
                             JSONObject jsonObjectForWeather = jsonArrayForWeather.getJSONObject(0);
-                            WeatherInformation.this.weatherType = jsonObjectForWeather.getString("main");
-                            WeatherInformation.this.description = jsonObjectForWeather.getString("description");
+                            weatherType = jsonObjectForWeather.getString("main");
+                            description = jsonObjectForWeather.getString("description");
                             JSONObject jsonObjectForTempPress = response.getJSONObject("main");
-                            WeatherInformation.this.temperature = jsonObjectForTempPress.getString("temp");
-                            WeatherInformation.this.pressure = jsonObjectForTempPress.getString("pressure");
-                            WeatherInformation.this.humidity = jsonObjectForTempPress.getString("humidity");
-                            WeatherInformation.this.date = response.getString("dt");
+                            temperature = jsonObjectForTempPress.getString("temp");
+                            pressure = jsonObjectForTempPress.getString("pressure");
+                            humidity = jsonObjectForTempPress.getString("humidity");
+                            date = response.getString("dt");
                             JSONObject jsonObjectForSys = response.getJSONObject("sys");
-                            WeatherInformation.this.sunrise = jsonObjectForSys.getString("sunrise");
-                            WeatherInformation.this.sunset = jsonObjectForSys.getString("sunset");
-                            WeatherInformation.this.name = response.getString("name");
+                            sunrise = jsonObjectForSys.getString("sunrise");
+                            sunset = jsonObjectForSys.getString("sunset");
+                            name = response.getString("name");
 //------------------------------------------------------------------------------------------------
-                            WeatherInformation.this.longSunrise = Long.parseLong(WeatherInformation.this.sunrise);
-                            WeatherInformation.this.longAdditionalSunrise = WeatherInformation.this.longSunrise + 3600000;
-                            WeatherInformation.this.longSunset = Long.parseLong(WeatherInformation.this.sunset);
-                            WeatherInformation.this.longAdditionalSunset = WeatherInformation.this.longSunset + 3600000;
-                            WeatherInformation.this.longNoon = WeatherInformation.this.longSunrise + 18000000;//5 hours
-                            WeatherInformation.this.longAdditionalNoon = WeatherInformation.this.longNoon + 3600000;
+                            longSunrise = Long.parseLong(sunrise);
+                            longAdditionalSunrise = longSunrise + 3600000;
+                            longSunset = Long.parseLong(sunset);
+                            longAdditionalSunset = longSunset + 3600000;
+                            longNoon = longSunrise + 18000000;//5 hours
+                            longAdditionalNoon = longNoon + 3600000;
                             long currentTime = System.currentTimeMillis();//long not contains it
 
 //---------------------------------------------------------------------------------------------
-                            String t = "1566761046434";
-                            long testTime = Long.parseLong(t) + 60*60000;
-                            long time = System.currentTimeMillis();
-                            if ((time >= Long.parseLong(t)) && (time <= testTime)) {
+
+                            /*Log.d("ll", "onResponse: "+currentTime);
+                            if (Long.parseLong(String.valueOf(currentTime)) > longSunrise) {
                                 breakFastNotification();
-                            }
-                            Log.d("ll", "onResponse: "+currentTime);
+                            }*/
+
 //-----------------------------------------------------------------------------------------------
-                            /*if ((currentTime >= WeatherInformation.this.longSunrise) && (currentTime <= WeatherInformation.this.longAdditionalSunrise)) {
+                           if ((Long.parseLong(String.valueOf(currentTime)) >= longSunrise) && (Long.parseLong(String.valueOf(currentTime)) <= longAdditionalSunrise)) {
                                 breakFastNotification();
                             }
 
 
-                            if ((currentTime >= WeatherInformation.this.longNoon) && (currentTime <= WeatherInformation.this.longAdditionalNoon)) {
+                            if ((Long.parseLong(String.valueOf(currentTime)) >= longNoon) && (Long.parseLong(String.valueOf(currentTime)) <= longAdditionalNoon)) {
                                 lunchNotification();
                             }
 
-                            if ((currentTime >= WeatherInformation.this.longSunset) && (currentTime <= WeatherInformation.this.longAdditionalSunset)) {
+                            if ((Long.parseLong(String.valueOf(currentTime)) >=longSunset) && (Long.parseLong(String.valueOf(currentTime)) <= longAdditionalSunset)) {
                                 dinnerNotification();
-                            }*/
-//----------------------------------------------------------------------------------------------
-
-                            Log.d("l", "Lat : " + WeatherInformation.this.currentLatitude + ",  Lon : " + WeatherInformation.this.currentLongitude);
-                            Log.d("weather", "weather type : " + WeatherInformation.this.weatherType + ", " + WeatherInformation.this.description);
-                            Log.d("main", "temp : " + WeatherInformation.this.temperature + ", " + WeatherInformation.this.pressure + ", " + WeatherInformation.this.humidity);
-                            Log.d("dt", "date : " + WeatherInformation.this.date);
-                            Log.d("sys", "sunrise : " + WeatherInformation.this.sunrise + ", sunset : " + WeatherInformation.this.sunset);
-                            Log.d("sys", "name : " + WeatherInformation.this.name);
-
-                            Log.d("t", "onResponse: " + System.currentTimeMillis());
-
-//---------------------------------------------------------------------------------------------
+                            }
 
 
                         } catch (JSONException e) {
