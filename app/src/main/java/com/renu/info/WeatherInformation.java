@@ -32,6 +32,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
+
 public class WeatherInformation extends Activity {
     private String message = "Hello Developer ! You are granted for software development. Please check your email";
     private String title = "Title";
@@ -85,6 +98,19 @@ public class WeatherInformation extends Activity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // to minimize activity
+        this.moveTaskToBack(true);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // to minimize activity
+        this.moveTaskToBack(true);
+    }
 
     //---------------------------------------------------------------------------------------------
     private void getDeviceCurrentLocation() {
@@ -150,32 +176,39 @@ public class WeatherInformation extends Activity {
                             sunset = jsonObjectForSys.getString("sunset");
                             name = response.getString("name");
 //------------------------------------------------------------------------------------------------
-                            longSunrise = Long.parseLong(sunrise);
-                            longAdditionalSunrise = longSunrise + 3600000;
-                            longSunset = Long.parseLong(sunset);
-                            longAdditionalSunset = longSunset + 3600000;
-                            longNoon = longSunrise + 18000000;//5 hours
-                            longAdditionalNoon = longNoon + 3600000;
-                            long currentTime = System.currentTimeMillis();//long not contains it
+                            longSunrise = Long.parseLong(sunrise)*1000;
+                            longAdditionalSunrise = longSunrise + 3600000;//add one hour
+                            longSunset = Long.parseLong(sunset)*1000;
+                            longAdditionalSunset = longSunset + 3600000;//add one hour
+                            longNoon = longSunrise + 18000000;//add 5 hours
+                            longAdditionalNoon = longNoon + 3600000;//add one hour
 
 //---------------------------------------------------------------------------------------------
+                            Date currentDate = new Date(System.currentTimeMillis());
+                            Date sunriseDate = new Date(longSunrise);
+                            Date noonDate = new Date(longNoon);
+                            Date sunsetDate = new Date(longSunset);
 
-                            /*Log.d("ll", "onResponse: "+currentTime);
-                            if (Long.parseLong(String.valueOf(currentTime)) > longSunrise) {
-                                breakFastNotification();
-                            }*/
+                            Date additionalSunriseDate = new Date(longAdditionalSunrise);
+                            Date additionalNoonDate = new Date(longAdditionalNoon);
+                            Date additionalSunsetDate = new Date(longAdditionalSunset);
+
+
 
 //-----------------------------------------------------------------------------------------------
-                           if ((Long.parseLong(String.valueOf(currentTime)) >= longSunrise) && (Long.parseLong(String.valueOf(currentTime)) <= longAdditionalSunrise)) {
+                           if ((currentDate.after(sunriseDate)||currentDate.equals(sunriseDate))
+                           && (currentDate.before(additionalSunriseDate)||currentDate.equals(additionalSunriseDate))) {
                                 breakFastNotification();
                             }
 
 
-                            if ((Long.parseLong(String.valueOf(currentTime)) >= longNoon) && (Long.parseLong(String.valueOf(currentTime)) <= longAdditionalNoon)) {
+                            if ((currentDate.after(noonDate)||currentDate.equals(noonDate))
+                                    && (currentDate.before(additionalNoonDate)||currentDate.equals(additionalNoonDate))) {
                                 lunchNotification();
                             }
 
-                            if ((Long.parseLong(String.valueOf(currentTime)) >=longSunset) && (Long.parseLong(String.valueOf(currentTime)) <= longAdditionalSunset)) {
+                            if ((currentDate.after(sunsetDate)||currentDate.equals(sunsetDate))
+                                    && (currentDate.before(additionalSunsetDate)||currentDate.equals(additionalSunsetDate))) {
                                 dinnerNotification();
                             }
 
