@@ -80,7 +80,9 @@ public class MainActivity extends AppCompatActivity {
 
         }
         //for heading
-        routinTextView.setText(menuFor);
+
+        routinTextView.setText(name+", "+(int) this.temperatureInCelciuas+" "+(char) 0x00B0+"C\n\n"+menuFor+"\n"+"-----------");
+        //routinTextView.setText(menuFor);
         //Handle Custom adapter
         handleCustomAdapter();
 
@@ -106,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
         this.sunset = bundle.getString("sunset");
         this.name = bundle.getString("name");
         this.menuFor = bundle.getString("menuFor");
-        Log.d("sss", "onCreate: " + this.description + ", " + this.sunrise + ", " + this.sunset + ", " + this.weatherType + " name : " + this.name);
     }
 
     public void convertTemperatureIntoCelciuas() {
@@ -121,22 +122,22 @@ public class MainActivity extends AppCompatActivity {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
 
-        breakfast.remove(1);
-        breakfast.remove(2);
-        breakfast.remove(4);
-        breakfast.remove(5);
-        breakfast.remove(6);
-        breakfast.remove(12);
-        breakfast.remove(13);
         breakfast.remove(15);
-        breakfastImages.remove(1);
-        breakfastImages.remove(2);
-        breakfastImages.remove(4);
-        breakfastImages.remove(5);
-        breakfastImages.remove(6);
-        breakfastImages.remove(12);
-        breakfastImages.remove(13);
+        breakfast.remove(13);
+        breakfast.remove(12);
+        breakfast.remove(6);
+        breakfast.remove(5);
+        breakfast.remove(4);
+        breakfast.remove(2);
+        breakfast.remove(1);
         breakfastImages.remove(15);
+        breakfastImages.remove(13);
+        breakfastImages.remove(12);
+        breakfastImages.remove(6);
+        breakfastImages.remove(5);
+        breakfastImages.remove(4);
+        breakfastImages.remove(2);
+        breakfastImages.remove(1);
 
         generateRandomList(breakfast, breakfastImages);
 
@@ -147,22 +148,22 @@ public class MainActivity extends AppCompatActivity {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
 
-        breakfast.remove(1);
-        breakfast.remove(2);
-        breakfast.remove(4);
-        breakfast.remove(5);
-        breakfast.remove(6);
-        breakfast.remove(12);
-        breakfast.remove(13);
         breakfast.remove(15);
-        breakfastImages.remove(1);
-        breakfastImages.remove(2);
-        breakfastImages.remove(4);
-        breakfastImages.remove(5);
-        breakfastImages.remove(6);
-        breakfastImages.remove(12);
-        breakfastImages.remove(13);
+        breakfast.remove(13);
+        breakfast.remove(12);
+        breakfast.remove(6);
+        breakfast.remove(5);
+        breakfast.remove(4);
+        breakfast.remove(2);
+        breakfast.remove(1);
         breakfastImages.remove(15);
+        breakfastImages.remove(13);
+        breakfastImages.remove(12);
+        breakfastImages.remove(6);
+        breakfastImages.remove(5);
+        breakfastImages.remove(4);
+        breakfastImages.remove(2);
+        breakfastImages.remove(1);
 
 
         generateRandomList(breakfast, breakfastImages);
@@ -173,22 +174,22 @@ public class MainActivity extends AppCompatActivity {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
 
-        breakfast.remove(1);
-        breakfast.remove(2);
-        breakfast.remove(4);
-        breakfast.remove(5);
-        breakfast.remove(6);
-        breakfast.remove(12);
-        breakfast.remove(13);
         breakfast.remove(15);
-        breakfastImages.remove(1);
-        breakfastImages.remove(2);
-        breakfastImages.remove(4);
-        breakfastImages.remove(5);
-        breakfastImages.remove(6);
-        breakfastImages.remove(12);
-        breakfastImages.remove(13);
+        breakfast.remove(13);
+        breakfast.remove(12);
+        breakfast.remove(6);
+        breakfast.remove(5);
+        breakfast.remove(4);
+        breakfast.remove(2);
+        breakfast.remove(1);
         breakfastImages.remove(15);
+        breakfastImages.remove(13);
+        breakfastImages.remove(12);
+        breakfastImages.remove(6);
+        breakfastImages.remove(5);
+        breakfastImages.remove(4);
+        breakfastImages.remove(2);
+        breakfastImages.remove(1);
 
 
         generateRandomList(breakfast, breakfastImages);
@@ -199,14 +200,14 @@ public class MainActivity extends AppCompatActivity {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
 
-        breakfast.remove(2);
-        breakfast.remove(6);
-        breakfast.remove(12);
         breakfast.remove(15);
-        breakfastImages.remove(2);
-        breakfastImages.remove(6);
-        breakfastImages.remove(12);
+        breakfast.remove(12);
+        breakfast.remove(6);
+        breakfast.remove(2);
         breakfastImages.remove(15);
+        breakfastImages.remove(12);
+        breakfastImages.remove(6);
+        breakfastImages.remove(2);
 
 
         generateRandomList(breakfast, breakfastImages);
@@ -217,12 +218,12 @@ public class MainActivity extends AppCompatActivity {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
 
-        breakfast.remove(2);
-        breakfast.remove(12);
         breakfast.remove(15);
-        breakfastImages.remove(2);
-        breakfastImages.remove(12);
+        breakfast.remove(12);
+        breakfast.remove(2);
         breakfastImages.remove(15);
+        breakfastImages.remove(12);
+        breakfastImages.remove(2);
 
 
         generateRandomList(breakfast, breakfastImages);
@@ -257,16 +258,16 @@ public class MainActivity extends AppCompatActivity {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
 
-        breakfast.remove(1);
-        breakfast.remove(12);
-        breakfast.remove(14);
-        breakfast.remove(17);
         breakfast.remove(18);
-        breakfastImages.remove(1);
-        breakfastImages.remove(12);
-        breakfastImages.remove(14);
-        breakfastImages.remove(17);
+        breakfast.remove(17);
+        breakfast.remove(14);
+        breakfast.remove(12);
+        breakfast.remove(1);
         breakfastImages.remove(18);
+        breakfastImages.remove(17);
+        breakfastImages.remove(14);
+        breakfastImages.remove(12);
+        breakfastImages.remove(1);
 
 
         generateRandomList(breakfast, breakfastImages);
@@ -277,20 +278,20 @@ public class MainActivity extends AppCompatActivity {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
 
-        breakfast.remove(1);
-        breakfast.remove(7);
-        breakfast.remove(12);
-        breakfast.remove(14);
-        breakfast.remove(16);
-        breakfast.remove(17);
         breakfast.remove(18);
-        breakfastImages.remove(1);
-        breakfastImages.remove(7);
-        breakfastImages.remove(12);
-        breakfastImages.remove(14);
-        breakfastImages.remove(16);
-        breakfastImages.remove(17);
+        breakfast.remove(17);
+        breakfast.remove(16);
+        breakfast.remove(14);
+        breakfast.remove(12);
+        breakfast.remove(7);
+        breakfast.remove(1);
         breakfastImages.remove(18);
+        breakfastImages.remove(17);
+        breakfastImages.remove(16);
+        breakfastImages.remove(14);
+        breakfastImages.remove(12);
+        breakfastImages.remove(7);
+        breakfastImages.remove(1);
 
         generateRandomList(breakfast, breakfastImages);
 
@@ -301,20 +302,20 @@ public class MainActivity extends AppCompatActivity {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
 
-        breakfast.remove(1);
-        breakfast.remove(7);
-        breakfast.remove(12);
-        breakfast.remove(14);
-        breakfast.remove(16);
-        breakfast.remove(17);
         breakfast.remove(18);
-        breakfastImages.remove(1);
-        breakfastImages.remove(7);
-        breakfastImages.remove(12);
-        breakfastImages.remove(14);
-        breakfastImages.remove(16);
-        breakfastImages.remove(17);
+        breakfast.remove(17);
+        breakfast.remove(16);
+        breakfast.remove(14);
+        breakfast.remove(12);
+        breakfast.remove(7);
+        breakfast.remove(1);
         breakfastImages.remove(18);
+        breakfastImages.remove(17);
+        breakfastImages.remove(16);
+        breakfastImages.remove(14);
+        breakfastImages.remove(12);
+        breakfastImages.remove(7);
+        breakfastImages.remove(1);
 
 
         generateRandomList(breakfast, breakfastImages);

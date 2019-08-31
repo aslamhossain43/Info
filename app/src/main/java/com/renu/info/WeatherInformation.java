@@ -32,22 +32,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.security.Timestamp;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
 
 public class WeatherInformation extends Activity {
-    private String message = "Hello Developer ! You are granted for software development. Please check your email";
-    private String title = "Title";
     private static final String CHANNEL_ID = "Message";
 
 //---------------------------------------------------------------------------------------
@@ -56,10 +44,9 @@ public class WeatherInformation extends Activity {
     private static final String API_KEY = "320c5059b0c17fad40e0a87704494e73";
     private double currentLatitude;
     private double currentLongitude;
-    String url = "https://api.openweathermap.org/data/2.5/weather?lat=" + currentLatitude + "&lon=" + currentLongitude + "&appid=" + API_KEY;
+    String url;
     //----------------------------------------------------------------------------------------------
-    //int valueLatitude;
-    //int valueLongitude;
+
     String weatherType;
     String description;
     String temperature;
@@ -90,7 +77,7 @@ public class WeatherInformation extends Activity {
         if (Network.isNetworkAvailable(this)) {
             getDeviceCurrentLocation();
 
-            getCurrentWeather();
+
 
 
         }
@@ -119,10 +106,16 @@ public class WeatherInformation extends Activity {
             fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
                 @Override
                 public void onSuccess(Location location) {
-                    if (location != null) {
-                        currentLatitude = location.getLatitude();
-                        currentLongitude = location.getLongitude();
+                    if (location == null) {
+                        return;
                     }
+
+                    currentLatitude = location.getLatitude();
+                    currentLongitude = location.getLongitude();
+                    getCurrentWeather(currentLatitude,currentLongitude);
+                    Log.d("lat", "onSuccess: " + currentLatitude + ", " + currentLongitude);
+
+
                 }
             });
         } else {
@@ -153,7 +146,9 @@ public class WeatherInformation extends Activity {
     }
 
     //--------------------------------------------------------------------------------------------
-    private void getCurrentWeather() {
+    private void getCurrentWeather(double currentLatitude,double currentLongitude) {
+
+        url = "https://api.openweathermap.org/data/2.5/weather?lat="+currentLatitude+"&lon="+currentLongitude+"&appid=" + API_KEY;
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -176,9 +171,9 @@ public class WeatherInformation extends Activity {
                             sunset = jsonObjectForSys.getString("sunset");
                             name = response.getString("name");
 //------------------------------------------------------------------------------------------------
-                            longSunrise = Long.parseLong(sunrise)*1000;
+                            longSunrise = Long.parseLong(sunrise) * 1000;
                             longAdditionalSunrise = longSunrise + 3600000;//add one hour
-                            longSunset = Long.parseLong(sunset)*1000;
+                            longSunset = Long.parseLong(sunset) * 1000;
                             longAdditionalSunset = longSunset + 3600000;//add one hour
                             longNoon = longSunrise + 18000000;//add 5 hours
                             longAdditionalNoon = longNoon + 3600000;//add one hour
@@ -192,11 +187,11 @@ public class WeatherInformation extends Activity {
                             Date additionalSunriseDate = new Date(longAdditionalSunrise);
                             Date additionalNoonDate = new Date(longAdditionalNoon);
                             Date additionalSunsetDate = new Date(longAdditionalSunset);
-
-
-
+                            Log.d("ll", "onResponse: current lat :" + currentLatitude + ", current lon : " + currentLongitude);
+                            Log.d("ll", "onResponse: " + new SimpleDateFormat("hh:mm a").format(sunriseDate) + ", " + new SimpleDateFormat("hh:mm a").format(sunsetDate) + ", current time : " + currentDate + " description : " + description + ", temp : " + temperature + ",humidity : " + humidity + ", name : " + name);
+                            breakFastNotification();
 //-----------------------------------------------------------------------------------------------
-                           if ((currentDate.after(sunriseDate)||currentDate.equals(sunriseDate))
+                           /*if ((currentDate.after(sunriseDate)||currentDate.equals(sunriseDate))
                            && (currentDate.before(additionalSunriseDate)||currentDate.equals(additionalSunriseDate))) {
                                 breakFastNotification();
                             }
@@ -210,13 +205,12 @@ public class WeatherInformation extends Activity {
                             if ((currentDate.after(sunsetDate)||currentDate.equals(sunsetDate))
                                     && (currentDate.before(additionalSunsetDate)||currentDate.equals(additionalSunsetDate))) {
                                 dinnerNotification();
-                            }
+                            }*/
 
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
 
                     }
                 }, new Response.ErrorListener() {
