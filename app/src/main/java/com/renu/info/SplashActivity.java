@@ -69,5 +69,9 @@ public class SplashActivity extends AppCompatActivity {
       this.moveTaskToBack(true);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        // to minimize activity
+        this.moveTaskToBack(true);
+    }
 }

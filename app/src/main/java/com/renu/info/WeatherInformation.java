@@ -243,7 +243,7 @@ public class WeatherInformation extends Activity {
         bundle.putString("sunrise", WeatherInformation.this.sunrise);
         bundle.putString("sunset", WeatherInformation.this.sunset);
         bundle.putString("name", WeatherInformation.this.name);
-        bundle.putString("menuFor", "Breakfast");
+        bundle.putString("menuFor", "Breakfast Menu");
 
         cintent.putExtras(bundle);
 //--------------------------------------------
@@ -251,8 +251,8 @@ public class WeatherInformation extends Activity {
         PendingIntent pendingIntent = PendingIntent.getActivity(WeatherInformation.this, 0, cintent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(WeatherInformation.this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_splash_info)
-                .setContentTitle("Breakfast")
+                .setSmallIcon(R.drawable.noti_icon9696)
+                .setContentTitle("Breakfast Menu")
                 .setContentText("You Can Choose Your Breakfast Menu")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
@@ -287,7 +287,7 @@ public class WeatherInformation extends Activity {
         bundle.putString("sunrise", WeatherInformation.this.sunrise);
         bundle.putString("sunset", WeatherInformation.this.sunset);
         bundle.putString("name", WeatherInformation.this.name);
-        bundle.putString("menuFor", "Lunch");
+        bundle.putString("menuFor", "Lunch Menu");
         cintent.putExtras(bundle);
 //--------------------------------------------
 
@@ -295,8 +295,8 @@ public class WeatherInformation extends Activity {
         PendingIntent pendingIntent = PendingIntent.getActivity(WeatherInformation.this, 0, cintent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(WeatherInformation.this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_splash_info)
-                .setContentTitle("Lunch")
+                .setSmallIcon(R.drawable.noti_icon9696)
+                .setContentTitle("Lunch Menu")
                 .setContentText("You Can Choose Your Lunch Menu")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
@@ -332,7 +332,7 @@ public class WeatherInformation extends Activity {
         bundle.putString("sunrise", WeatherInformation.this.sunrise);
         bundle.putString("sunset", WeatherInformation.this.sunset);
         bundle.putString("name", WeatherInformation.this.name);
-        bundle.putString("menuFor", "Dinner");
+        bundle.putString("menuFor", "Dinner Menu");
         cintent.putExtras(bundle);
 //--------------------------------------------
 
@@ -340,8 +340,8 @@ public class WeatherInformation extends Activity {
         PendingIntent pendingIntent = PendingIntent.getActivity(WeatherInformation.this, 0, cintent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(WeatherInformation.this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_splash_info)
-                .setContentTitle("Dinner")
+                .setSmallIcon(R.drawable.noti_icon9696)
+                .setContentTitle("Dinner Menu")
                 .setContentText("You Can Choose Your Dinner Menu")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)

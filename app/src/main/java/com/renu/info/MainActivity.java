@@ -1,5 +1,8 @@
 package com.renu.info;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,14 +21,13 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
     private ListView mainListViewId;
     private String[] breakfast;
-    private String[] finalBreakfast;
     private Integer[] breakfastImages = {R.drawable.egg, R.drawable.banana, R.drawable.greek_yogurt
             , R.drawable.coffee, R.drawable.oats, R.drawable.chia_seeds, R.drawable.berries
             , R.drawable.nuts, R.drawable.green_tea, R.drawable.cooked_chicken, R.drawable.cooked_fish
             , R.drawable.cooked_meat, R.drawable.cottage_cheese, R.drawable.flax_seeds, R.drawable.paratha
             , R.drawable.kachchi_biryani, R.drawable.chicken_pilaf, R.drawable.grilled_chicken, R.drawable.sheek_kabab
             , R.drawable.mixed_vegetables, R.drawable.shrimp_with_vegetable, R.drawable.milk};
-    private int[] finalBreakfastImages;
+    private String[]breakfastDetails;
     private TextView routinTextView;
     //----------------------------------------------------------------------------------------------
     String weatherType;
@@ -81,11 +83,8 @@ public class MainActivity extends AppCompatActivity {
         }
         //for heading
 
-        routinTextView.setText(name+", "+(int) this.temperatureInCelciuas+" "+(char) 0x00B0+"C\n\n"+menuFor+"\n"+"-----------");
-        //routinTextView.setText(menuFor);
-        //Handle Custom adapter
-        handleCustomAdapter();
-
+        routinTextView.setText(menuFor+"\n"+"================");
+        Log.d("tt", "onCreate: "+(int)this.temperatureInCelciuas);
 
     }
 
@@ -94,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
         mainListViewId = findViewById(R.id.mainListViewId);
         routinTextView = findViewById(R.id.routinTextViewId);
         breakfast = getResources().getStringArray(R.array.foods);
+        breakfastDetails=getResources().getStringArray(R.array.foods_details);
     }
 
     public void getBundleDataFromWeatherInfo() {
@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void temp5_8_Down_Degree() {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
+        List<String> breakfastDetails = new ArrayList<>(Arrays.asList(this.breakfastDetails));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
 
         breakfast.remove(15);
@@ -130,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
         breakfast.remove(4);
         breakfast.remove(2);
         breakfast.remove(1);
+
         breakfastImages.remove(15);
         breakfastImages.remove(13);
         breakfastImages.remove(12);
@@ -139,13 +141,23 @@ public class MainActivity extends AppCompatActivity {
         breakfastImages.remove(2);
         breakfastImages.remove(1);
 
-        generateRandomList(breakfast, breakfastImages);
+        breakfastDetails.remove(15);
+        breakfastDetails.remove(13);
+        breakfastDetails.remove(12);
+        breakfastDetails.remove(6);
+        breakfastDetails.remove(5);
+        breakfastDetails.remove(4);
+        breakfastDetails.remove(2);
+        breakfastDetails.remove(1);
+
+        generateRandomList(breakfast, breakfastImages,breakfastDetails);
 
     }
 
 
     public void temp9_12Degree() {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
+        List<String> breakfastDetails = new ArrayList<>(Arrays.asList(this.breakfastDetails));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
 
         breakfast.remove(15);
@@ -165,13 +177,23 @@ public class MainActivity extends AppCompatActivity {
         breakfastImages.remove(2);
         breakfastImages.remove(1);
 
+        breakfastDetails.remove(15);
+        breakfastDetails.remove(13);
+        breakfastDetails.remove(12);
+        breakfastDetails.remove(6);
+        breakfastDetails.remove(5);
+        breakfastDetails.remove(4);
+        breakfastDetails.remove(2);
+        breakfastDetails.remove(1);
 
-        generateRandomList(breakfast, breakfastImages);
+
+        generateRandomList(breakfast, breakfastImages,breakfastDetails);
 
     }
 
     public void temp13_16Degree() {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
+        List<String> breakfastDetails = new ArrayList<>(Arrays.asList(this.breakfastDetails));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
 
         breakfast.remove(15);
@@ -192,12 +214,22 @@ public class MainActivity extends AppCompatActivity {
         breakfastImages.remove(1);
 
 
-        generateRandomList(breakfast, breakfastImages);
+        breakfastDetails.remove(15);
+        breakfastDetails.remove(13);
+        breakfastDetails.remove(12);
+        breakfastDetails.remove(6);
+        breakfastDetails.remove(5);
+        breakfastDetails.remove(4);
+        breakfastDetails.remove(2);
+        breakfastDetails.remove(1);
+
+        generateRandomList(breakfast, breakfastImages,breakfastDetails);
 
     }
 
     public void temp17_20Degree() {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
+        List<String> breakfastDetails = new ArrayList<>(Arrays.asList(this.breakfastDetails));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
 
         breakfast.remove(15);
@@ -210,12 +242,18 @@ public class MainActivity extends AppCompatActivity {
         breakfastImages.remove(2);
 
 
-        generateRandomList(breakfast, breakfastImages);
+        breakfastDetails.remove(15);
+        breakfastDetails.remove(12);
+        breakfastDetails.remove(6);
+        breakfastDetails.remove(2);
+
+        generateRandomList(breakfast, breakfastImages,breakfastDetails);
 
     }
 
     public void temp21_24Degree() {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
+        List<String> breakfastDetails = new ArrayList<>(Arrays.asList(this.breakfastDetails));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
 
         breakfast.remove(15);
@@ -226,36 +264,46 @@ public class MainActivity extends AppCompatActivity {
         breakfastImages.remove(2);
 
 
-        generateRandomList(breakfast, breakfastImages);
+        breakfastDetails.remove(15);
+        breakfastDetails.remove(12);
+        breakfastDetails.remove(2);
+
+
+        generateRandomList(breakfast, breakfastImages,breakfastDetails);
 
     }
 
     public void temp25_28Degree() {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
+        List<String> breakfastDetails = new ArrayList<>(Arrays.asList(this.breakfastDetails));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
 
         breakfast.remove(18);
         breakfastImages.remove(18);
+        breakfastDetails.remove(18);
 
-        generateRandomList(breakfast, breakfastImages);
+        generateRandomList(breakfast, breakfastImages,breakfastDetails);
 
 
     }
 
     public void temp29_32Degree() {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
+        List<String> breakfastDetails = new ArrayList<>(Arrays.asList(this.breakfastDetails));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
 
         breakfast.remove(18);
         breakfastImages.remove(18);
+        breakfastDetails.remove(18);
 
 
-        generateRandomList(breakfast, breakfastImages);
+        generateRandomList(breakfast, breakfastImages,breakfastDetails);
 
     }
 
     public void temp33_36Degree() {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
+        List<String> breakfastDetails = new ArrayList<>(Arrays.asList(this.breakfastDetails));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
 
         breakfast.remove(18);
@@ -269,13 +317,20 @@ public class MainActivity extends AppCompatActivity {
         breakfastImages.remove(12);
         breakfastImages.remove(1);
 
+        breakfastDetails.remove(18);
+        breakfastDetails.remove(17);
+        breakfastDetails.remove(14);
+        breakfastDetails.remove(12);
+        breakfastDetails.remove(1);
 
-        generateRandomList(breakfast, breakfastImages);
+
+        generateRandomList(breakfast, breakfastImages,breakfastDetails);
 
     }
 
     public void temp37_40Degree() {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
+        List<String> breakfastDetails = new ArrayList<>(Arrays.asList(this.breakfastDetails));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
 
         breakfast.remove(18);
@@ -293,13 +348,22 @@ public class MainActivity extends AppCompatActivity {
         breakfastImages.remove(7);
         breakfastImages.remove(1);
 
-        generateRandomList(breakfast, breakfastImages);
+        breakfastDetails.remove(18);
+        breakfastDetails.remove(17);
+        breakfastDetails.remove(16);
+        breakfastDetails.remove(14);
+        breakfastDetails.remove(12);
+        breakfastDetails.remove(7);
+        breakfastDetails.remove(1);
+
+        generateRandomList(breakfast, breakfastImages,breakfastDetails);
 
 
     }
 
     public void temp41_44_Up_Degree() {
         List<String> breakfast = new ArrayList<>(Arrays.asList(this.breakfast));
+        List<String> breakfastDetails = new ArrayList<>(Arrays.asList(this.breakfastDetails));
         List<Integer> breakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
 
         breakfast.remove(18);
@@ -317,17 +381,26 @@ public class MainActivity extends AppCompatActivity {
         breakfastImages.remove(7);
         breakfastImages.remove(1);
 
+        breakfastDetails.remove(18);
+        breakfastDetails.remove(17);
+        breakfastDetails.remove(16);
+        breakfastDetails.remove(14);
+        breakfastDetails.remove(12);
+        breakfastDetails.remove(7);
+        breakfastDetails.remove(1);
 
-        generateRandomList(breakfast, breakfastImages);
+
+        generateRandomList(breakfast, breakfastImages,breakfastDetails);
 
     }
 
-    private void generateRandomList(List<String> breakfastInner, List<Integer> breakfastImagesInner) {
+    private void generateRandomList(List<String> breakfastInner, List<Integer> breakfastImagesInner,List<String>breakfastDetailsInner) {
         Random rand = new Random();
 
         // create a temporary list for storing
         // selected element
         List<String> newListForBreakFast = new ArrayList<>();
+        List<String> newListForBreakFastDetails = new ArrayList<>();
         List<Integer> newListForBreakFastImages = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
 
@@ -337,23 +410,26 @@ public class MainActivity extends AppCompatActivity {
 
             // add element in temporary list
             newListForBreakFast.add(breakfastInner.get(randomIndex));
+            newListForBreakFastDetails.add(breakfastDetailsInner.get(randomIndex));
             // remove for avoid repeat
             breakfastInner.remove(randomIndex);
+            breakfastDetailsInner.remove(randomIndex);
             newListForBreakFastImages.add(breakfastImagesInner.get(randomIndex));
             // remove for avoid repeat
             breakfastImagesInner.remove(randomIndex);
         }
 
 
-        convertListIntoArray(newListForBreakFast, newListForBreakFastImages);
+        convertListIntoArray(newListForBreakFast, newListForBreakFastImages,newListForBreakFastDetails);
 
 
     }
 
-    public void convertListIntoArray(List<String> stringBreakfast, List<Integer> intBreakfastImages) {
+    public void convertListIntoArray(List<String> stringBreakfast, List<Integer> intBreakfastImages,List<String>stringBreakfastDetails) {
 
 
-        this.finalBreakfast = stringBreakfast.toArray(new String[stringBreakfast.size()]);
+        String[]finalBreakfast = stringBreakfast.toArray(new String[stringBreakfast.size()]);
+        String[] finalBreakfastDetails = stringBreakfastDetails.toArray(new String[stringBreakfastDetails.size()]);
 
 //convert List<Integer> into int[]
         int size = intBreakfastImages.size();
@@ -364,21 +440,40 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        this.finalBreakfastImages = result;
+        int []finalBreakfastImages = result;
+
+        //Handle Custom adapter
+        handleCustomAdapter(finalBreakfast,finalBreakfastImages,finalBreakfastDetails);
+
 
     }
 
-    public void handleCustomAdapter() {
-        CustomFoodAdapter customFoodAdapter = new CustomFoodAdapter(this, this.finalBreakfast, this.finalBreakfastImages);
+    public void handleCustomAdapter(String[] finalBreakfastNames,int []finalBreakfastImages,String[] finalBreakfastDetails) {
+        CustomFoodAdapter customFoodAdapter = new CustomFoodAdapter(this, finalBreakfastNames, finalBreakfastImages);
         mainListViewId.setAdapter(customFoodAdapter);
 
         mainListViewId.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String food_names = finalBreakfast[position];
-                Toast.makeText(MainActivity.this, food_names, Toast.LENGTH_SHORT).show();
+               Intent intent=new Intent(MainActivity.this,FoodsDetails.class);
+
+                //sending data to another activity
+                Bundle bundle = new Bundle();
+                bundle.putInt("foodPosition",position);
+               // bundle.putIntArray("foodImages",MainActivity.this.finalBreakfastImages);
+                //bundle.putStringArray("foodNames",MainActivity.this.finalBreakfast);
+                bundle.putStringArray("foodDetails",finalBreakfastDetails);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        // to minimize activity
+        this.moveTaskToBack(true);
 
     }
 }

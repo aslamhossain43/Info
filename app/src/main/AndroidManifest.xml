@@ -3,17 +3,18 @@
     package="com.renu.info">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <application
         android:allowBackup="true"
-        android:icon="@drawable/icon"
+        android:icon="@drawable/noti_icon9696"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/icon"
+        android:roundIcon="@drawable/noti_icon9696"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".FoodsDetails"></activity>
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,14 +22,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" /> <!-- <activity android:name=".CurrentInformationOfDevice"/> -->
+        <activity android:name=".WeatherInformation" />
 
-        <activity android:name=".MainActivity"/>
-        <!--<activity android:name=".CurrentInformationOfDevice"/>-->
-        <activity android:name=".WeatherInformation"/>
-        <service android:enabled="true" android:name=".MyFoodService"/>
+        <service
+            android:name=".MyFoodService"
+            android:enabled="true" />
+
         <receiver android:name=".MyBroadCastReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
     </application>

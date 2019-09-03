@@ -31,4 +31,33 @@
 
     </string-array>
 
+
+
+    <string-array name="foods_details">
+
+        <item>https://en.wikipedia.org/wiki/Egg</item>
+        <item>https://en.wikipedia.org/wiki/Bana</item>
+        <item>https://en.wikipedia.org/wiki/Strained_yogurt</item>
+        <item>https://en.wikipedia.org/wiki/Coffee</item>
+        <item>https://en.wikipedia.org/wiki/Oatmeal</item>
+        <item>https://en.wikipedia.org/wiki/Chia_seed</item>
+        <item>https://en.wikipedia.org/wiki/Berry</item>
+        <item>https://en.wikipedia.org/wiki/Nut_(fruit)</item>
+        <item>https://en.wikipedia.org/wiki/Green_tea</item>
+        <item>https://en.wikipedia.org/wiki/Chicken</item>
+        <item>https://en.wikipedia.org/wiki/Fish_as_food</item>
+        <item>https://en.wikipedia.org/wiki/Meat</item>
+        <item>https://en.wikipedia.org/wiki/Cottage_cheese</item>
+        <item>https://en.wikipedia.org/wiki/Flax</item>
+        <item>https://en.wikipedia.org/wiki/Paratha</item>
+        <item>https://en.wikipedia.org/wiki/Biryani</item>
+        <item>https://en.wikipedia.org/wiki/Pilaf</item>
+        <item>https://en.wikipedia.org/wiki/Barbecue_chicken</item>
+        <item>https://en.wikipedia.org/wiki/Seekh_kebab</item>
+        <item>https://en.wikipedia.org/wiki/Vegetable</item>
+        <item>https://en.wikipedia.org/wiki/List_of_shrimp_dishes</item>
+        <item>https://en.wikipedia.org/wiki/Milk</item>
+
+    </string-array>
+
 </resources>
