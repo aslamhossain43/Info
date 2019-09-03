@@ -187,11 +187,9 @@ public class WeatherInformation extends Activity {
                             Date additionalSunriseDate = new Date(longAdditionalSunrise);
                             Date additionalNoonDate = new Date(longAdditionalNoon);
                             Date additionalSunsetDate = new Date(longAdditionalSunset);
-                            Log.d("ll", "onResponse: current lat :" + currentLatitude + ", current lon : " + currentLongitude);
-                            Log.d("ll", "onResponse: " + new SimpleDateFormat("hh:mm a").format(sunriseDate) + ", " + new SimpleDateFormat("hh:mm a").format(sunsetDate) + ", current time : " + currentDate + " description : " + description + ", temp : " + temperature + ",humidity : " + humidity + ", name : " + name);
-                            breakFastNotification();
+                            // breakFastNotification();
 //-----------------------------------------------------------------------------------------------
-                           /*if ((currentDate.after(sunriseDate)||currentDate.equals(sunriseDate))
+                           if ((currentDate.after(sunriseDate)||currentDate.equals(sunriseDate))
                            && (currentDate.before(additionalSunriseDate)||currentDate.equals(additionalSunriseDate))) {
                                 breakFastNotification();
                             }
@@ -205,7 +203,7 @@ public class WeatherInformation extends Activity {
                             if ((currentDate.after(sunsetDate)||currentDate.equals(sunsetDate))
                                     && (currentDate.before(additionalSunsetDate)||currentDate.equals(additionalSunsetDate))) {
                                 dinnerNotification();
-                            }*/
+                            }
 
 
                         } catch (JSONException e) {
