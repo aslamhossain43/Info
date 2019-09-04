@@ -187,9 +187,11 @@ public class WeatherInformation extends Activity {
                             Date additionalSunriseDate = new Date(longAdditionalSunrise);
                             Date additionalNoonDate = new Date(longAdditionalNoon);
                             Date additionalSunsetDate = new Date(longAdditionalSunset);
-                            // breakFastNotification();
+                            Log.d("ll", "onResponse: current lat :" + currentLatitude + ", current lon : " + currentLongitude);
+                            Log.d("ll", "onResponse: " + new SimpleDateFormat("hh:mm a").format(sunriseDate) + ", " + new SimpleDateFormat("hh:mm a").format(sunsetDate) + ", current time : " + currentDate + " description : " + description + ", temp : " + temperature + ",humidity : " + humidity + ", name : " + name);
+                            breakFastNotification();
 //-----------------------------------------------------------------------------------------------
-                           if ((currentDate.after(sunriseDate)||currentDate.equals(sunriseDate))
+                           /*if ((currentDate.after(sunriseDate)||currentDate.equals(sunriseDate))
                            && (currentDate.before(additionalSunriseDate)||currentDate.equals(additionalSunriseDate))) {
                                 breakFastNotification();
                             }
@@ -203,7 +205,7 @@ public class WeatherInformation extends Activity {
                             if ((currentDate.after(sunsetDate)||currentDate.equals(sunsetDate))
                                     && (currentDate.before(additionalSunsetDate)||currentDate.equals(additionalSunsetDate))) {
                                 dinnerNotification();
-                            }
+                            }*/
 
 
                         } catch (JSONException e) {
@@ -249,7 +251,7 @@ public class WeatherInformation extends Activity {
         PendingIntent pendingIntent = PendingIntent.getActivity(WeatherInformation.this, 0, cintent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(WeatherInformation.this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.noti_icon9696)
+                .setSmallIcon(R.drawable.noti_icon2424)
                 .setContentTitle("Breakfast Menu")
                 .setContentText("You Can Choose Your Breakfast Menu")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -293,7 +295,7 @@ public class WeatherInformation extends Activity {
         PendingIntent pendingIntent = PendingIntent.getActivity(WeatherInformation.this, 0, cintent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(WeatherInformation.this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.noti_icon9696)
+                .setSmallIcon(R.drawable.noti_icon2424)
                 .setContentTitle("Lunch Menu")
                 .setContentText("You Can Choose Your Lunch Menu")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -338,7 +340,7 @@ public class WeatherInformation extends Activity {
         PendingIntent pendingIntent = PendingIntent.getActivity(WeatherInformation.this, 0, cintent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(WeatherInformation.this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.noti_icon9696)
+                .setSmallIcon(R.drawable.noti_icon2424)
                 .setContentTitle("Dinner Menu")
                 .setContentText("You Can Choose Your Dinner Menu")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)

@@ -12,8 +12,8 @@ import java.util.TimerTask;
 
 
 public class MyFoodService extends Service {
-    public static final int notify = 3000000;  //interval between two services(Here Service run every 50 Minute)
-    //public static final int notify = 120000;  //interval between two services(Here Service run every 20 seconds)
+    //public static final int notify = 3000000;  //interval between two services(Here Service run every 50 Minute)
+    public static final int notify = 60000;  //interval between two services(Here Service run every 20 seconds)
     private Handler mHandler = new Handler();   //run on another Thread to avoid crash
     private Timer mTimer = null;    //timer handling
 
