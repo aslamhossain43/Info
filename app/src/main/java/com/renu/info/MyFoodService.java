@@ -1,6 +1,7 @@
 package com.renu.info;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
@@ -17,15 +18,30 @@ public class MyFoodService extends Service {
     private Handler mHandler = new Handler();   //run on another Thread to avoid crash
     private Timer mTimer = null;    //timer handling
 
-    //---------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------
+    @Nullable
     @Override
-    public void onCreate() {
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+
+
         if (mTimer != null) // Cancel if already existed
             mTimer.cancel();
         else
             mTimer = new Timer();   //recreate new
         mTimer.scheduleAtFixedRate(new TimeDisplay(), 0, notify);   //Schedule task
+
+
+
+        return START_STICKY;
+
+
     }
+
 
     class TimeDisplay extends TimerTask {
         @Override
@@ -49,28 +65,7 @@ public class MyFoodService extends Service {
     }
 
 
-    //-------------------------------------------------------------------------------------------
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
 
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-
-        return START_STICKY;
-
-
-    }
-
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mTimer.cancel();
-
-    }
 
 
 }

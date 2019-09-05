@@ -68,8 +68,6 @@ public class WeatherInformation extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // to minimize activity
-        this.moveTaskToBack(true);
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -85,12 +83,7 @@ public class WeatherInformation extends Activity {
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        // to minimize activity
-        this.moveTaskToBack(true);
-    }
+
 
     @Override
     protected void onResume() {
@@ -251,7 +244,7 @@ public class WeatherInformation extends Activity {
         PendingIntent pendingIntent = PendingIntent.getActivity(WeatherInformation.this, 0, cintent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(WeatherInformation.this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.noti_icon2424)
+                .setSmallIcon(R.drawable.noti_icon9696)
                 .setContentTitle("Breakfast Menu")
                 .setContentText("You Can Choose Your Breakfast Menu")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -295,7 +288,7 @@ public class WeatherInformation extends Activity {
         PendingIntent pendingIntent = PendingIntent.getActivity(WeatherInformation.this, 0, cintent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(WeatherInformation.this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.noti_icon2424)
+                .setSmallIcon(R.drawable.noti_icon9696)
                 .setContentTitle("Lunch Menu")
                 .setContentText("You Can Choose Your Lunch Menu")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -340,7 +333,7 @@ public class WeatherInformation extends Activity {
         PendingIntent pendingIntent = PendingIntent.getActivity(WeatherInformation.this, 0, cintent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(WeatherInformation.this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.noti_icon2424)
+                .setSmallIcon(R.drawable.noti_icon9696)
                 .setContentTitle("Dinner Menu")
                 .setContentText("You Can Choose Your Dinner Menu")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
