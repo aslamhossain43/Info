@@ -476,4 +476,13 @@ public class MainActivity extends AppCompatActivity {
         this.moveTaskToBack(true);
 
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Intent intent = new Intent(getApplicationContext(), MyBroadCastReceiver.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        sendBroadcast(intent);
+    }
+
 }

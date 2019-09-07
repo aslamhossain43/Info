@@ -68,14 +68,15 @@ public class WeatherInformation extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Log.d("www", "onCreate: Weather : YES !");
+// to minimize activity
+        this.moveTaskToBack(true);
+        // api call
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
 
         if (Network.isNetworkAvailable(this)) {
             getDeviceCurrentLocation();
-
-
 
 
         }
@@ -88,8 +89,17 @@ public class WeatherInformation extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+
         // to minimize activity
         this.moveTaskToBack(true);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Intent intent = new Intent(getApplicationContext(), MyBroadCastReceiver.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        sendBroadcast(intent);
     }
 
     //---------------------------------------------------------------------------------------------
@@ -105,7 +115,7 @@ public class WeatherInformation extends Activity {
 
                     currentLatitude = location.getLatitude();
                     currentLongitude = location.getLongitude();
-                    getCurrentWeather(currentLatitude,currentLongitude);
+                    getCurrentWeather(currentLatitude, currentLongitude);
                     Log.d("lat", "onSuccess: " + currentLatitude + ", " + currentLongitude);
 
 
@@ -139,9 +149,9 @@ public class WeatherInformation extends Activity {
     }
 
     //--------------------------------------------------------------------------------------------
-    private void getCurrentWeather(double currentLatitude,double currentLongitude) {
+    private void getCurrentWeather(double currentLatitude, double currentLongitude) {
 
-        url = "https://api.openweathermap.org/data/2.5/weather?lat="+currentLatitude+"&lon="+currentLongitude+"&appid=" + API_KEY;
+        url = "https://api.openweathermap.org/data/2.5/weather?lat=" + currentLatitude + "&lon=" + currentLongitude + "&appid=" + API_KEY;
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -182,24 +192,25 @@ public class WeatherInformation extends Activity {
                             Date additionalSunsetDate = new Date(longAdditionalSunset);
                             Log.d("ll", "onResponse: current lat :" + currentLatitude + ", current lon : " + currentLongitude);
                             Log.d("ll", "onResponse: " + new SimpleDateFormat("hh:mm a").format(sunriseDate) + ", " + new SimpleDateFormat("hh:mm a").format(sunsetDate) + ", current time : " + currentDate + " description : " + description + ", temp : " + temperature + ",humidity : " + humidity + ", name : " + name);
+                            Log.d("www", "onCreate: Weather before notify: YES !");
                             breakFastNotification();
 //-----------------------------------------------------------------------------------------------
-                           /*if ((currentDate.after(sunriseDate)||currentDate.equals(sunriseDate))
-                           && (currentDate.before(additionalSunriseDate)||currentDate.equals(additionalSunriseDate))) {
+                            /*if ((currentDate.after(sunriseDate) || currentDate.equals(sunriseDate))
+                                    && (currentDate.before(additionalSunriseDate) || currentDate.equals(additionalSunriseDate))) {
                                 breakFastNotification();
                             }
 
 
-                            if ((currentDate.after(noonDate)||currentDate.equals(noonDate))
-                                    && (currentDate.before(additionalNoonDate)||currentDate.equals(additionalNoonDate))) {
+                            if ((currentDate.after(noonDate) || currentDate.equals(noonDate))
+                                    && (currentDate.before(additionalNoonDate) || currentDate.equals(additionalNoonDate))) {
                                 lunchNotification();
                             }
 
-                            if ((currentDate.after(sunsetDate)||currentDate.equals(sunsetDate))
-                                    && (currentDate.before(additionalSunsetDate)||currentDate.equals(additionalSunsetDate))) {
+                            if ((currentDate.after(sunsetDate) || currentDate.equals(sunsetDate))
+                                    && (currentDate.before(additionalSunsetDate) || currentDate.equals(additionalSunsetDate))) {
                                 dinnerNotification();
-                            }*/
-
+                            }
+*/
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -223,7 +234,7 @@ public class WeatherInformation extends Activity {
         createNotificationChannel();
 
         Intent cintent = new Intent(WeatherInformation.this, MainActivity.class);
-        cintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        cintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK /*| Intent.FLAG_ACTIVITY_CLEAR_TASK*/);
 
         //sending data to another activity
         Bundle bundle = new Bundle();
@@ -267,7 +278,7 @@ public class WeatherInformation extends Activity {
         createNotificationChannel();
 
         Intent cintent = new Intent(WeatherInformation.this, MainActivity.class);
-        cintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        cintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK /*| Intent.FLAG_ACTIVITY_CLEAR_TASK*/);
 
         //sending data to another activity
         Bundle bundle = new Bundle();
@@ -312,7 +323,7 @@ public class WeatherInformation extends Activity {
         createNotificationChannel();
 
         Intent cintent = new Intent(WeatherInformation.this, MainActivity.class);
-        cintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        cintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK /*| Intent.FLAG_ACTIVITY_CLEAR_TASK*/);
 
         //sending data to another activity
         Bundle bundle = new Bundle();

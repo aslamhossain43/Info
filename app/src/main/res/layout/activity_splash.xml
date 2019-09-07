@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/icon"
     android:gravity="bottom|center"
+    android:id="@+id/splashFullScreenId"
     tools:context=".SplashActivity">
 
     <ProgressBar

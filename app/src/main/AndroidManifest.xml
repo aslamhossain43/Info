@@ -22,15 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" /> <!-- <activity android:name=".CurrentInformationOfDevice"/> -->
+        <activity android:name=".MainActivity" />
+        <!-- <activity android:name=".CurrentInformationOfDevice"/> -->
         <activity android:name=".WeatherInformation" />
 
-        <service
-            android:name=".MyFoodService"
-            android:enabled="true" />
 
         <receiver android:name=".MyBroadCastReceiver">
             <intent-filter>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>

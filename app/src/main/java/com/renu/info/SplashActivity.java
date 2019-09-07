@@ -1,7 +1,12 @@
 package com.renu.info;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
@@ -14,7 +19,9 @@ public class SplashActivity extends AppCompatActivity {
     private AlertDialog.Builder alertDialogBuilder;
     private AlertDialog alertDialog;
     private ProgressBar progressBar;
+    private View splashFullScreen;
     private int progress;
+    MyBroadCastReceiver myBroadCastReceiver = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,17 +34,23 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         intiViews();
         initAll();
+
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 doWork();
 
-                startService(new Intent(SplashActivity.this, MyFoodService.class));
+
+//----------------------------------------------------------
+                Log.d("www", "onCreate: splash : YES !");
+                Intent intent = new Intent(getApplicationContext(), MyBroadCastReceiver.class);
+                sendBroadcast(intent);
 
 
             }
         });
         thread.start();
+
     }
 
 
@@ -51,7 +64,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void intiViews() {
         progressBar = findViewById(R.id.progressBarId);
-
+        splashFullScreen=findViewById(R.id.splashFullScreenId);
 
     }
 
@@ -66,8 +79,49 @@ public class SplashActivity extends AppCompatActivity {
         }
 
 // to minimize activity
-      this.moveTaskToBack(true);
+        this.moveTaskToBack(true);
+
+
+
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        splashFullScreen.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action=event.getAction();
+                if (action==MotionEvent.ACTION_UP){
+                    // to minimize activity
+                    SplashActivity.this.moveTaskToBack(true);
+                }
+                if (action==MotionEvent.ACTION_DOWN){
+                    // to minimize activity
+                    SplashActivity.this.moveTaskToBack(true);
+                }
+                if (action==MotionEvent.ACTION_MOVE){
+                    // to minimize activity
+                    SplashActivity.this.moveTaskToBack(true);
+                }
+                return true;
+            }
+        });
+
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SplashActivity.this.progressBar.setVisibility(View.INVISIBLE);
 
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Intent intent = new Intent(getApplicationContext(), MyBroadCastReceiver.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        sendBroadcast(intent);
+    }
 }
