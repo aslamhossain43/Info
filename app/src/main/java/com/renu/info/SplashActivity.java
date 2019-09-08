@@ -1,27 +1,19 @@
 package com.renu.info;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashActivity extends AppCompatActivity {
-    private boolean isNetworkOk;
-    private AlertDialog.Builder alertDialogBuilder;
-    private AlertDialog alertDialog;
     private ProgressBar progressBar;
     private View splashFullScreen;
     private int progress;
-    MyBroadCastReceiver myBroadCastReceiver = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +25,7 @@ public class SplashActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_splash);
         intiViews();
-        initAll();
+
 
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -42,7 +34,6 @@ public class SplashActivity extends AppCompatActivity {
 
 
 //----------------------------------------------------------
-                Log.d("www", "onCreate: splash : YES !");
                 Intent intent = new Intent(getApplicationContext(), MyBroadCastReceiver.class);
                 sendBroadcast(intent);
 
@@ -54,17 +45,9 @@ public class SplashActivity extends AppCompatActivity {
     }
 
 
-    private void initAll() {
-
-        isNetworkOk = Network.isNetworkAvailable(this);
-        alertDialogBuilder = new AlertDialog.Builder(SplashActivity.this);
-        alertDialog = alertDialogBuilder.create();
-    }
-
-
     private void intiViews() {
         progressBar = findViewById(R.id.progressBarId);
-        splashFullScreen=findViewById(R.id.splashFullScreenId);
+        splashFullScreen = findViewById(R.id.splashFullScreenId);
 
     }
 
@@ -82,24 +65,24 @@ public class SplashActivity extends AppCompatActivity {
         this.moveTaskToBack(true);
 
 
-
     }
+
     @Override
     protected void onResume() {
         super.onResume();
         splashFullScreen.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                int action=event.getAction();
-                if (action==MotionEvent.ACTION_UP){
+                int action = event.getAction();
+                if (action == MotionEvent.ACTION_UP) {
                     // to minimize activity
                     SplashActivity.this.moveTaskToBack(true);
                 }
-                if (action==MotionEvent.ACTION_DOWN){
+                if (action == MotionEvent.ACTION_DOWN) {
                     // to minimize activity
                     SplashActivity.this.moveTaskToBack(true);
                 }
-                if (action==MotionEvent.ACTION_MOVE){
+                if (action == MotionEvent.ACTION_MOVE) {
                     // to minimize activity
                     SplashActivity.this.moveTaskToBack(true);
                 }

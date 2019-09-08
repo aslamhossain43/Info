@@ -23,13 +23,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <!-- <activity android:name=".CurrentInformationOfDevice"/> -->
         <activity android:name=".WeatherInformation" />
 
 
-        <receiver android:name=".MyBroadCastReceiver">
+        <receiver android:name=".MyBroadCastReceiver" android:enabled="true">
             <intent-filter>
-                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>

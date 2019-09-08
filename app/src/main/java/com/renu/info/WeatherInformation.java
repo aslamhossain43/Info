@@ -12,7 +12,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,7 +23,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -32,7 +30,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class WeatherInformation extends Activity {
@@ -40,7 +37,6 @@ public class WeatherInformation extends Activity {
 
 //---------------------------------------------------------------------------------------
 
-    private FusedLocationProviderClient fusedLocationProviderClient;
     private static final String API_KEY = "320c5059b0c17fad40e0a87704494e73";
     private double currentLatitude;
     private double currentLongitude;
@@ -68,23 +64,56 @@ public class WeatherInformation extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("www", "onCreate: Weather : YES !");
-// to minimize activity
+
+        // to minimize activity
         this.moveTaskToBack(true);
-        // api call
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
 
         if (Network.isNetworkAvailable(this)) {
             getDeviceCurrentLocation();
 
 
+        } else {
+            offLineNotification();
         }
 
 
     }
 
+    private void offLineNotification() {
 
+        createNotificationChannel();
+
+        Intent cintent = new Intent(WeatherInformation.this, MainActivity.class);
+        cintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(WeatherInformation.this, 0, cintent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(WeatherInformation.this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.noti_icon9696)
+                .setContentTitle("Your Foods Menu")
+                .setContentText("You Can Choose Your Foods Menu")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
+        Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+        mBuilder.setSound(uri);
+
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(WeatherInformation.this);
+        int notificationId = (int) (System.currentTimeMillis() / 4);
+        notificationManager.notify(notificationId, mBuilder.build());
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // to minimize activity
+        this.moveTaskToBack(true);
+    }
 
     @Override
     protected void onResume() {
@@ -106,17 +135,15 @@ public class WeatherInformation extends Activity {
     private void getDeviceCurrentLocation() {
         if (checkLocationPermission()) {
 
-            fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+            LocationServices.getFusedLocationProviderClient(this).getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
                 @Override
                 public void onSuccess(Location location) {
                     if (location == null) {
                         return;
                     }
-
                     currentLatitude = location.getLatitude();
                     currentLongitude = location.getLongitude();
                     getCurrentWeather(currentLatitude, currentLongitude);
-                    Log.d("lat", "onSuccess: " + currentLatitude + ", " + currentLongitude);
 
 
                 }
@@ -190,12 +217,10 @@ public class WeatherInformation extends Activity {
                             Date additionalSunriseDate = new Date(longAdditionalSunrise);
                             Date additionalNoonDate = new Date(longAdditionalNoon);
                             Date additionalSunsetDate = new Date(longAdditionalSunset);
-                            Log.d("ll", "onResponse: current lat :" + currentLatitude + ", current lon : " + currentLongitude);
-                            Log.d("ll", "onResponse: " + new SimpleDateFormat("hh:mm a").format(sunriseDate) + ", " + new SimpleDateFormat("hh:mm a").format(sunsetDate) + ", current time : " + currentDate + " description : " + description + ", temp : " + temperature + ",humidity : " + humidity + ", name : " + name);
-                            Log.d("www", "onCreate: Weather before notify: YES !");
-                            breakFastNotification();
+//---------------------------------------------------------------------------------------------
+                            // breakFastNotification();
 //-----------------------------------------------------------------------------------------------
-                            /*if ((currentDate.after(sunriseDate) || currentDate.equals(sunriseDate))
+                            if ((currentDate.after(sunriseDate) || currentDate.equals(sunriseDate))
                                     && (currentDate.before(additionalSunriseDate) || currentDate.equals(additionalSunriseDate))) {
                                 breakFastNotification();
                             }
@@ -210,8 +235,6 @@ public class WeatherInformation extends Activity {
                                     && (currentDate.before(additionalSunsetDate) || currentDate.equals(additionalSunsetDate))) {
                                 dinnerNotification();
                             }
-*/
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

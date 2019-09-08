@@ -1,8 +1,6 @@
 package com.renu.info;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
             , R.drawable.cooked_meat, R.drawable.cottage_cheese, R.drawable.flax_seeds, R.drawable.paratha
             , R.drawable.kachchi_biryani, R.drawable.chicken_pilaf, R.drawable.grilled_chicken, R.drawable.sheek_kabab
             , R.drawable.mixed_vegetables, R.drawable.shrimp_with_vegetable, R.drawable.milk};
-    private String[]breakfastDetails;
+    private String[] breakfastDetails;
     private TextView routinTextView;
     //----------------------------------------------------------------------------------------------
     String weatherType;
@@ -51,40 +49,56 @@ public class MainActivity extends AppCompatActivity {
         // Initialization view properties
         initView();
 
+        if (Network.isNetworkAvailable(this)) {
 
-        //Get from WeatherINformation Activity
-        getBundleDataFromWeatherInfo();
-        //Convert temp into Celciuas
-        convertTemperatureIntoCelciuas();
-        // Data adding by condition
-        if (((int) this.temperatureInCelciuas <= 5) && ((int) this.temperatureInCelciuas <= 8)) {
-            temp5_8_Down_Degree();
-        } else if (((int) this.temperatureInCelciuas <= 9) && ((int) this.temperatureInCelciuas <= 12)) {
-            temp9_12Degree();
-        } else if (((int) this.temperatureInCelciuas <= 13) && ((int) this.temperatureInCelciuas <= 16)) {
-            temp13_16Degree();
-        } else if (((int) this.temperatureInCelciuas <= 17) && ((int) this.temperatureInCelciuas <= 20)) {
-            temp17_20Degree();
-        } else if (((int) this.temperatureInCelciuas <= 21) && ((int) this.temperatureInCelciuas <= 24)) {
-            temp21_24Degree();
-        } else if (((int) this.temperatureInCelciuas <= 25) && ((int) this.temperatureInCelciuas <= 28)) {
-            temp25_28Degree();
-        } else if (((int) this.temperatureInCelciuas <= 29) && ((int) this.temperatureInCelciuas <= 32)) {
-            temp29_32Degree();
-        } else if (((int) this.temperatureInCelciuas <= 33) && ((int) this.temperatureInCelciuas <= 36)) {
-            temp33_36Degree();
-        } else if (((int) this.temperatureInCelciuas <= 37) && ((int) this.temperatureInCelciuas <= 40)) {
-            temp37_40Degree();
-        } else if (((int) this.temperatureInCelciuas <= 41) && ((int) this.temperatureInCelciuas <= 44)) {
-            temp41_44_Up_Degree();
+
+            //Get from WeatherINformation Activity
+            getBundleDataFromWeatherInfo();
+            //Convert temp into Celciuas
+            convertTemperatureIntoCelciuas();
+
+
+            // Data adding by condition
+            if (((int) this.temperatureInCelciuas <= 5) && ((int) this.temperatureInCelciuas <= 8)) {
+                temp5_8_Down_Degree();
+            } else if (((int) this.temperatureInCelciuas <= 9) && ((int) this.temperatureInCelciuas <= 12)) {
+                temp9_12Degree();
+            } else if (((int) this.temperatureInCelciuas <= 13) && ((int) this.temperatureInCelciuas <= 16)) {
+                temp13_16Degree();
+            } else if (((int) this.temperatureInCelciuas <= 17) && ((int) this.temperatureInCelciuas <= 20)) {
+                temp17_20Degree();
+            } else if (((int) this.temperatureInCelciuas <= 21) && ((int) this.temperatureInCelciuas <= 24)) {
+                temp21_24Degree();
+            } else if (((int) this.temperatureInCelciuas <= 25) && ((int) this.temperatureInCelciuas <= 28)) {
+                temp25_28Degree();
+            } else if (((int) this.temperatureInCelciuas <= 29) && ((int) this.temperatureInCelciuas <= 32)) {
+                temp29_32Degree();
+            } else if (((int) this.temperatureInCelciuas <= 33) && ((int) this.temperatureInCelciuas <= 36)) {
+                temp33_36Degree();
+            } else if (((int) this.temperatureInCelciuas <= 37) && ((int) this.temperatureInCelciuas <= 40)) {
+                temp37_40Degree();
+            } else if (((int) this.temperatureInCelciuas <= 41) && ((int) this.temperatureInCelciuas <= 44)) {
+                temp41_44_Up_Degree();
+            } else {
+                temp41_44_Up_Degree();
+
+            }
+
+            //for heading
+
+            routinTextView.setText(menuFor + "\n" + "================");
+
         } else {
-            temp41_44_Up_Degree();
+
+
+            handleCustomAdapterOffLine();
+
+            //for heading
+
+            routinTextView.setText("Foods Menu" + "\n" + "================");
 
         }
-        //for heading
 
-        routinTextView.setText(menuFor+"\n"+"================");
-        Log.d("tt", "onCreate: "+(int)this.temperatureInCelciuas);
 
     }
 
@@ -93,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         mainListViewId = findViewById(R.id.mainListViewId);
         routinTextView = findViewById(R.id.routinTextViewId);
         breakfast = getResources().getStringArray(R.array.foods);
-        breakfastDetails=getResources().getStringArray(R.array.foods_details);
+        breakfastDetails = getResources().getStringArray(R.array.foods_details);
     }
 
     public void getBundleDataFromWeatherInfo() {
@@ -113,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
     public void convertTemperatureIntoCelciuas() {
         this.temperatureInDouble = Double.parseDouble(this.temperature);
         this.temperatureInCelciuas = this.temperatureInDouble - 273.15;
-        Log.d("ttt", "onCreate: " + (int) this.temperatureInCelciuas);
 
     }
 
@@ -150,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
         breakfastDetails.remove(2);
         breakfastDetails.remove(1);
 
-        generateRandomList(breakfast, breakfastImages,breakfastDetails);
+        generateRandomList(breakfast, breakfastImages, breakfastDetails);
 
     }
 
@@ -187,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
         breakfastDetails.remove(1);
 
 
-        generateRandomList(breakfast, breakfastImages,breakfastDetails);
+        generateRandomList(breakfast, breakfastImages, breakfastDetails);
 
     }
 
@@ -223,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
         breakfastDetails.remove(2);
         breakfastDetails.remove(1);
 
-        generateRandomList(breakfast, breakfastImages,breakfastDetails);
+        generateRandomList(breakfast, breakfastImages, breakfastDetails);
 
     }
 
@@ -247,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
         breakfastDetails.remove(6);
         breakfastDetails.remove(2);
 
-        generateRandomList(breakfast, breakfastImages,breakfastDetails);
+        generateRandomList(breakfast, breakfastImages, breakfastDetails);
 
     }
 
@@ -269,7 +282,7 @@ public class MainActivity extends AppCompatActivity {
         breakfastDetails.remove(2);
 
 
-        generateRandomList(breakfast, breakfastImages,breakfastDetails);
+        generateRandomList(breakfast, breakfastImages, breakfastDetails);
 
     }
 
@@ -282,7 +295,7 @@ public class MainActivity extends AppCompatActivity {
         breakfastImages.remove(18);
         breakfastDetails.remove(18);
 
-        generateRandomList(breakfast, breakfastImages,breakfastDetails);
+        generateRandomList(breakfast, breakfastImages, breakfastDetails);
 
 
     }
@@ -297,7 +310,7 @@ public class MainActivity extends AppCompatActivity {
         breakfastDetails.remove(18);
 
 
-        generateRandomList(breakfast, breakfastImages,breakfastDetails);
+        generateRandomList(breakfast, breakfastImages, breakfastDetails);
 
     }
 
@@ -324,7 +337,7 @@ public class MainActivity extends AppCompatActivity {
         breakfastDetails.remove(1);
 
 
-        generateRandomList(breakfast, breakfastImages,breakfastDetails);
+        generateRandomList(breakfast, breakfastImages, breakfastDetails);
 
     }
 
@@ -356,7 +369,7 @@ public class MainActivity extends AppCompatActivity {
         breakfastDetails.remove(7);
         breakfastDetails.remove(1);
 
-        generateRandomList(breakfast, breakfastImages,breakfastDetails);
+        generateRandomList(breakfast, breakfastImages, breakfastDetails);
 
 
     }
@@ -390,11 +403,11 @@ public class MainActivity extends AppCompatActivity {
         breakfastDetails.remove(1);
 
 
-        generateRandomList(breakfast, breakfastImages,breakfastDetails);
+        generateRandomList(breakfast, breakfastImages, breakfastDetails);
 
     }
 
-    private void generateRandomList(List<String> breakfastInner, List<Integer> breakfastImagesInner,List<String>breakfastDetailsInner) {
+    private void generateRandomList(List<String> breakfastInner, List<Integer> breakfastImagesInner, List<String> breakfastDetailsInner) {
         Random rand = new Random();
 
         // create a temporary list for storing
@@ -420,15 +433,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        convertListIntoArray(newListForBreakFast, newListForBreakFastImages,newListForBreakFastDetails);
+        convertListIntoArray(newListForBreakFast, newListForBreakFastImages, newListForBreakFastDetails);
 
 
     }
 
-    public void convertListIntoArray(List<String> stringBreakfast, List<Integer> intBreakfastImages,List<String>stringBreakfastDetails) {
+    public void convertListIntoArray(List<String> stringBreakfast, List<Integer> intBreakfastImages, List<String> stringBreakfastDetails) {
 
 
-        String[]finalBreakfast = stringBreakfast.toArray(new String[stringBreakfast.size()]);
+        String[] finalBreakfast = stringBreakfast.toArray(new String[stringBreakfast.size()]);
         String[] finalBreakfastDetails = stringBreakfastDetails.toArray(new String[stringBreakfastDetails.size()]);
 
 //convert List<Integer> into int[]
@@ -440,31 +453,84 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        int []finalBreakfastImages = result;
+        int[] finalBreakfastImages = result;
 
         //Handle Custom adapter
-        handleCustomAdapter(finalBreakfast,finalBreakfastImages,finalBreakfastDetails);
+
+
+        handleCustomAdapterOnLine(finalBreakfast, finalBreakfastImages, finalBreakfastDetails);
 
 
     }
 
-    public void handleCustomAdapter(String[] finalBreakfastNames,int []finalBreakfastImages,String[] finalBreakfastDetails) {
+    private void handleCustomAdapterOffLine() {
+
+
+        List<Integer> innerBreakfastImages = new ArrayList<>(Arrays.asList(this.breakfastImages));
+
+//convert List<Integer> into int[]
+        int size = innerBreakfastImages.size();
+        int[] result = new int[size];
+        Integer[] temp = innerBreakfastImages.toArray(new Integer[size]);
+        for (int n = 0; n < size; ++n) {
+            result[n] = temp[n];
+        }
+
+
+        int[] breakfastImagesOffLine = result;
+
+        CustomFoodAdapter customFoodAdapter = new CustomFoodAdapter(this, this.breakfast, breakfastImagesOffLine);
+        mainListViewId.setAdapter(customFoodAdapter);
+
+        mainListViewId.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                if (Network.isNetworkAvailable(MainActivity.this)) {
+
+
+                    Intent intent = new Intent(MainActivity.this, FoodsDetails.class);
+
+                    //sending data to another activity
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("foodPosition", position);
+                    bundle.putStringArray("foodDetails", MainActivity.this.breakfastDetails);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+
+
+                } else {
+                    Toast.makeText(MainActivity.this, "Connect Internet", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+    }
+
+    public void handleCustomAdapterOnLine(String[] finalBreakfastNames, int[] finalBreakfastImages, String[] finalBreakfastDetails) {
         CustomFoodAdapter customFoodAdapter = new CustomFoodAdapter(this, finalBreakfastNames, finalBreakfastImages);
         mainListViewId.setAdapter(customFoodAdapter);
 
         mainListViewId.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               Intent intent=new Intent(MainActivity.this,FoodsDetails.class);
 
-                //sending data to another activity
-                Bundle bundle = new Bundle();
-                bundle.putInt("foodPosition",position);
-               // bundle.putIntArray("foodImages",MainActivity.this.finalBreakfastImages);
-                //bundle.putStringArray("foodNames",MainActivity.this.finalBreakfast);
-                bundle.putStringArray("foodDetails",finalBreakfastDetails);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                if (Network.isNetworkAvailable(MainActivity.this)) {
+
+
+                    Intent intent = new Intent(MainActivity.this, FoodsDetails.class);
+
+                    //sending data to another activity
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("foodPosition", position);
+                    bundle.putStringArray("foodDetails", finalBreakfastDetails);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(MainActivity.this, "Connect Internet", Toast.LENGTH_SHORT).show();
+
+                }
             }
         });
 
