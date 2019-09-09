@@ -7,6 +7,23 @@
     android:orientation="vertical"
     android:background="#6AC006"
     tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/weatherBtnId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="#0DCC15"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#F7F6F3"
+        android:textStyle="bold"
+        android:text="Current Weather"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:paddingHorizontal="10dp"
+        />
+
+
     <TextView
         android:id="@+id/routinTextViewId"
         android:layout_width="match_parent"

@@ -20,7 +20,7 @@ public class MyBroadCastReceiver extends BroadcastReceiver {
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, i, 0);
 
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 300000, pendingIntent);
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 3000000, pendingIntent);
 
 
         } else {
@@ -31,7 +31,7 @@ public class MyBroadCastReceiver extends BroadcastReceiver {
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, i, 0);
 
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 300000, pendingIntent);
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 3000000, pendingIntent);
 
 
         }

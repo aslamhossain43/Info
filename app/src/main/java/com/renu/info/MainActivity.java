@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
             , R.drawable.mixed_vegetables, R.drawable.shrimp_with_vegetable, R.drawable.milk};
     private String[] breakfastDetails;
     private TextView routinTextView;
+    private Button weatherBtn;
     //----------------------------------------------------------------------------------------------
     String weatherType;
     String description;
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     String sunrise;
     String sunset;
     String name;
+    String windSpeed;
     String menuFor;
 
     //----------------------------------------------------------------------------------------------
@@ -85,17 +88,35 @@ public class MainActivity extends AppCompatActivity {
             }
 
             //for heading
+            routinTextView.setText(">>"+menuFor + "<<\n");
 
-            routinTextView.setText(menuFor + "\n" + "================");
+            weatherBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (v.getId() == R.id.weatherBtnId) {
+                        Intent i = new Intent(MainActivity.this, WeatherDetails.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("name", MainActivity.this.name);
+                        bundle.putString("description", MainActivity.this.description);
+                        bundle.putString("humidity", MainActivity.this.humidity);
+                        bundle.putString("speed", MainActivity.this.windSpeed);
+                        bundle.putInt("temp", (int) MainActivity.this.temperatureInCelciuas);
+
+                        i.putExtras(bundle);
+                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(i);
+                    }
+                }
+            });
 
         } else {
 
-
+            weatherBtn.setVisibility(View.INVISIBLE);
             handleCustomAdapterOffLine();
 
             //for heading
 
-            routinTextView.setText("Foods Menu" + "\n" + "================");
+            routinTextView.setText(">>Foods Menu<<" + "\n");
 
         }
 
@@ -108,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
         routinTextView = findViewById(R.id.routinTextViewId);
         breakfast = getResources().getStringArray(R.array.foods);
         breakfastDetails = getResources().getStringArray(R.array.foods_details);
+        weatherBtn = findViewById(R.id.weatherBtnId);
     }
 
     public void getBundleDataFromWeatherInfo() {
@@ -121,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
         this.sunrise = bundle.getString("sunrise");
         this.sunset = bundle.getString("sunset");
         this.name = bundle.getString("name");
+        this.windSpeed = bundle.getString("speed");
         this.menuFor = bundle.getString("menuFor");
     }
 

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#009688"
+    android:orientation="vertical"
+    tools:context=".WeatherDetails">
+
+    <TextView
+        android:id="@+id/weatherDetailsTextViewId"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fontFamily="@string/common_google_play_services_enable_button"
+        android:gravity="center"
+        android:text="Current Weather"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#F7F6F3"
+        android:textSize="30sp"
+
+        />
+
+
+</LinearLayout>

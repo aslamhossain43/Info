@@ -52,6 +52,7 @@ public class WeatherInformation extends Activity {
     String sunrise;
     String sunset;
     String name;
+    String windSpeed;
     //------------------------------
     long longSunrise;
     long longAdditionalSunrise;
@@ -194,6 +195,8 @@ public class WeatherInformation extends Activity {
                             JSONObject jsonObjectForTempPress = response.getJSONObject("main");
                             temperature = jsonObjectForTempPress.getString("temp");
                             pressure = jsonObjectForTempPress.getString("pressure");
+                            JSONObject jsonObjectForWind=response.getJSONObject("wind");
+                            windSpeed=jsonObjectForWind.getString("speed");
                             humidity = jsonObjectForTempPress.getString("humidity");
                             date = response.getString("dt");
                             JSONObject jsonObjectForSys = response.getJSONObject("sys");
@@ -218,7 +221,7 @@ public class WeatherInformation extends Activity {
                             Date additionalNoonDate = new Date(longAdditionalNoon);
                             Date additionalSunsetDate = new Date(longAdditionalSunset);
 //---------------------------------------------------------------------------------------------
-                            // breakFastNotification();
+                            //breakFastNotification();
 //-----------------------------------------------------------------------------------------------
                             if ((currentDate.after(sunriseDate) || currentDate.equals(sunriseDate))
                                     && (currentDate.before(additionalSunriseDate) || currentDate.equals(additionalSunriseDate))) {
@@ -270,6 +273,7 @@ public class WeatherInformation extends Activity {
         bundle.putString("sunrise", WeatherInformation.this.sunrise);
         bundle.putString("sunset", WeatherInformation.this.sunset);
         bundle.putString("name", WeatherInformation.this.name);
+        bundle.putString("speed", WeatherInformation.this.windSpeed);
         bundle.putString("menuFor", "Breakfast Menu");
 
         cintent.putExtras(bundle);
@@ -314,6 +318,7 @@ public class WeatherInformation extends Activity {
         bundle.putString("sunrise", WeatherInformation.this.sunrise);
         bundle.putString("sunset", WeatherInformation.this.sunset);
         bundle.putString("name", WeatherInformation.this.name);
+        bundle.putString("speed", WeatherInformation.this.windSpeed);
         bundle.putString("menuFor", "Lunch Menu");
         cintent.putExtras(bundle);
 //--------------------------------------------
@@ -359,6 +364,7 @@ public class WeatherInformation extends Activity {
         bundle.putString("sunrise", WeatherInformation.this.sunrise);
         bundle.putString("sunset", WeatherInformation.this.sunset);
         bundle.putString("name", WeatherInformation.this.name);
+        bundle.putString("speed", WeatherInformation.this.windSpeed);
         bundle.putString("menuFor", "Dinner Menu");
         cintent.putExtras(bundle);
 //--------------------------------------------
