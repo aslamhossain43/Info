@@ -103,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
                         bundle.putInt("temp", (int) MainActivity.this.temperatureInCelciuas);
 
                         i.putExtras(bundle);
-                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(i);
                     }
                 }

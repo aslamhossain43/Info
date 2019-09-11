@@ -35,6 +35,7 @@ public class SplashActivity extends AppCompatActivity {
 
 //----------------------------------------------------------
                 Intent intent = new Intent(getApplicationContext(), MyBroadCastReceiver.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 sendBroadcast(intent);
 
 
