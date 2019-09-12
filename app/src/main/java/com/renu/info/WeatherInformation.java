@@ -167,7 +167,7 @@ public class WeatherInformation extends Activity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
-        if (grantResults.length > 0) {
+        if (grantResults.length >= 0) {
 
 
             if (requestCode == 111 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
