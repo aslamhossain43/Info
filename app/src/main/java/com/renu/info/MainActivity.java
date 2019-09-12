@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     String sunset;
     String name;
     String windSpeed;
-    String menuFor = null;
+    String menuFor;
 
     //----------------------------------------------------------------------------------------------
     @Override
@@ -52,11 +52,50 @@ public class MainActivity extends AppCompatActivity {
         initView();
 
 
-        //Get from WeatherINformation Activity
-        getBundleDataFromWeatherInfo();
+        if (Network.isNetworkAvailable(this)) {
 
-        if (Network.isNetworkAvailable(this) && this.menuFor != null) {
+            //Get from WeatherINformation Activity
+            getBundleDataFromWeatherInfo();
 
+        } else {
+
+            weatherBtn.setVisibility(View.INVISIBLE);
+            handleCustomAdapterOffLine();
+
+            //for heading
+
+            routinTextView.setText(">>Foods Menu<<" + "\n");
+
+        }
+
+
+    }
+
+    public void initView() {
+
+        mainListViewId = findViewById(R.id.mainListViewId);
+        routinTextView = findViewById(R.id.routinTextViewId);
+        breakfast = getResources().getStringArray(R.array.foods);
+        breakfastDetails = getResources().getStringArray(R.array.foods_details);
+        weatherBtn = findViewById(R.id.weatherBtnId);
+    }
+
+    public void getBundleDataFromWeatherInfo() {
+        Bundle bundle = getIntent().getExtras();
+
+        if (bundle != null) {
+
+            this.weatherType = bundle.getString("weatherType");
+            this.description = bundle.getString("description");
+            this.temperature = bundle.getString("temperature");
+            this.pressure = bundle.getString("pressure");
+            this.humidity = bundle.getString("humidity");
+            this.date = bundle.getString("date");
+            this.sunrise = bundle.getString("sunrise");
+            this.sunset = bundle.getString("sunset");
+            this.name = bundle.getString("name");
+            this.windSpeed = bundle.getString("speed");
+            this.menuFor = bundle.getString("menuFor");
             //Convert temp into Celciuas
             convertTemperatureIntoCelciuas();
 
@@ -108,8 +147,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-        } else {
 
+        } else {
             weatherBtn.setVisibility(View.INVISIBLE);
             handleCustomAdapterOffLine();
 
@@ -117,33 +156,9 @@ public class MainActivity extends AppCompatActivity {
 
             routinTextView.setText(">>Foods Menu<<" + "\n");
 
+
         }
 
-
-    }
-
-    public void initView() {
-
-        mainListViewId = findViewById(R.id.mainListViewId);
-        routinTextView = findViewById(R.id.routinTextViewId);
-        breakfast = getResources().getStringArray(R.array.foods);
-        breakfastDetails = getResources().getStringArray(R.array.foods_details);
-        weatherBtn = findViewById(R.id.weatherBtnId);
-    }
-
-    public void getBundleDataFromWeatherInfo() {
-        Bundle bundle = getIntent().getExtras();
-        this.weatherType = bundle.getString("weatherType");
-        this.description = bundle.getString("description");
-        this.temperature = bundle.getString("temperature");
-        this.pressure = bundle.getString("pressure");
-        this.humidity = bundle.getString("humidity");
-        this.date = bundle.getString("date");
-        this.sunrise = bundle.getString("sunrise");
-        this.sunset = bundle.getString("sunset");
-        this.name = bundle.getString("name");
-        this.windSpeed = bundle.getString("speed");
-        this.menuFor = bundle.getString("menuFor");
     }
 
     public void convertTemperatureIntoCelciuas() {
