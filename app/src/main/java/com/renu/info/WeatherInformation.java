@@ -260,7 +260,7 @@ public class WeatherInformation extends Activity {
         createNotificationChannel();
 
         Intent cintent = new Intent(WeatherInformation.this, MainActivity.class);
-        cintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK /*| Intent.FLAG_ACTIVITY_CLEAR_TASK*/);
+        cintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         //sending data to another activity
         Bundle bundle = new Bundle();
@@ -305,7 +305,7 @@ public class WeatherInformation extends Activity {
         createNotificationChannel();
 
         Intent cintent = new Intent(WeatherInformation.this, MainActivity.class);
-        cintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK /*| Intent.FLAG_ACTIVITY_CLEAR_TASK*/);
+        cintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         //sending data to another activity
         Bundle bundle = new Bundle();
@@ -351,7 +351,7 @@ public class WeatherInformation extends Activity {
         createNotificationChannel();
 
         Intent cintent = new Intent(WeatherInformation.this, MainActivity.class);
-        cintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK /*| Intent.FLAG_ACTIVITY_CLEAR_TASK*/);
+        cintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         //sending data to another activity
         Bundle bundle = new Bundle();
