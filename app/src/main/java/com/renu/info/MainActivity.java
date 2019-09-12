@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     String sunset;
     String name;
     String windSpeed;
-    String menuFor;
+    String menuFor=null;
 
     //----------------------------------------------------------------------------------------------
     @Override
@@ -52,11 +52,12 @@ public class MainActivity extends AppCompatActivity {
         // Initialization view properties
         initView();
 
-        if (Network.isNetworkAvailable(this)) {
 
+        //Get from WeatherINformation Activity
+        getBundleDataFromWeatherInfo();
 
-            //Get from WeatherINformation Activity
-            getBundleDataFromWeatherInfo();
+        if (Network.isNetworkAvailable(this) && this.menuFor!=null) {
+
             //Convert temp into Celciuas
             convertTemperatureIntoCelciuas();
 
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-        } else {
+        } else{
 
             weatherBtn.setVisibility(View.INVISIBLE);
             handleCustomAdapterOffLine();
