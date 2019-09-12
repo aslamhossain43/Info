@@ -2,7 +2,6 @@ package com.renu.info;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     String sunset;
     String name;
     String windSpeed;
-    String menuFor=null;
+    String menuFor = null;
 
     //----------------------------------------------------------------------------------------------
     @Override
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         //Get from WeatherINformation Activity
         getBundleDataFromWeatherInfo();
 
-        if (Network.isNetworkAvailable(this) && this.menuFor!=null) {
+        if (Network.isNetworkAvailable(this) && this.menuFor != null) {
 
             //Convert temp into Celciuas
             convertTemperatureIntoCelciuas();
@@ -89,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             //for heading
-            routinTextView.setText(">>"+menuFor + "<<\n");
+            routinTextView.setText(">>" + menuFor + "<<\n");
 
             weatherBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -109,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-        } else{
+        } else {
 
             weatherBtn.setVisibility(View.INVISIBLE);
             handleCustomAdapterOffLine();

@@ -195,8 +195,8 @@ public class WeatherInformation extends Activity {
                             JSONObject jsonObjectForTempPress = response.getJSONObject("main");
                             temperature = jsonObjectForTempPress.getString("temp");
                             pressure = jsonObjectForTempPress.getString("pressure");
-                            JSONObject jsonObjectForWind=response.getJSONObject("wind");
-                            windSpeed=jsonObjectForWind.getString("speed");
+                            JSONObject jsonObjectForWind = response.getJSONObject("wind");
+                            windSpeed = jsonObjectForWind.getString("speed");
                             humidity = jsonObjectForTempPress.getString("humidity");
                             date = response.getString("dt");
                             JSONObject jsonObjectForSys = response.getJSONObject("sys");
